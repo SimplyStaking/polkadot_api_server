@@ -1,0 +1,7 @@
+.idea/
+__pycache__/
+
+node_modules/
+
+config/user_config_main.ini
+config/user_config_nodes.ini

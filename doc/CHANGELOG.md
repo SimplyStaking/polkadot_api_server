@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.2.1
+
+Released on 17th February 2020
+
+### Added
+
+* Updated @polkadot/api package version to use the latest stable version (V1.2.1)
+* Updated docs to refer to the latest docker image version
+
 ## 1.1.1
 
 Released on 6th February 2020

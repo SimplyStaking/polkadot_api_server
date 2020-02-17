@@ -9,7 +9,7 @@
   "author": "Daniel Magro",
   "license": "Apache-2.0",
   "dependencies": {
-    "@polkadot/api": "^1.1.1",
+    "@polkadot/api": "^1.2.1",
     "await-timeout": "^0.6.0",
     "configparser": "^0.3.6",
     "express": "^4.17.1"

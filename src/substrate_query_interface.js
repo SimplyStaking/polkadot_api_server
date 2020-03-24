@@ -96,7 +96,7 @@ async function getStakingCurrentElected(api) {
 
 async function getStakingStakers(api, accountAddress) {
     return await Promise.race([
-        api.query.staking.stakers(accountAddress),
+        api.query.staking.nominators(accountAddress),
         Timeout.set(TIMEOUT_TIME_MS, 'API call staking/stakers failed.')]);
 }
 

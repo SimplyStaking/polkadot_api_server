@@ -1,5 +1,18 @@
 # Change Log
 
+## 1.8.1
+
+Released on 25th March 2020
+
+Updated to @polkadot/api package v1.8.1
+
+### Breaking Changes:
+* `/api/query/staking/stakers` has been changed to `/api/query/staking/erasStakers`. The `account_address` parameter has been changed to `account_id` and the optional parameter `era_index` has been added.
+* `/api/query/staking/currentElected` has been changed to `/api/derive/staking/validators`. The new endpoint now returns both `validators`, the list of validators which are active in the current `session`, as well as `nextElected`, the list of `validators` which will be active in the next `session`.
+
+### Additions:
+* `/api/query/staking/activeEra` has been added, which returns the `index` and `start` of the `active era`
+
 ## 1.4.1
 
 Released on 26th February 2020

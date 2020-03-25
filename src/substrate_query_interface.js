@@ -87,17 +87,32 @@ async function getSessionValidators(api) {
 }
 
 // Staking
-async function getStakingCurrentElected(api) {
+async function getStakingActiveEra(api) {
     return await Promise.race([
-        api.query.staking.currentElected(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call staking/currentElected failed.')]);
+        api.query.staking.activeEra(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
-async function getStakingStakers(api, accountAddress) {
-    return await Promise.race([
-        api.query.staking.stakers(accountAddress),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/stakers failed.')]);
+async function getStakingErasStakers(api, accountId, eraIndex) {
+    // check if eraIndex has been provided or not
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasStakers(eraIndex, accountId),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasStakers failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveEraIndex failed.';
+        }
+
+        return await Promise.race([
+            api.query.staking.erasStakers(activeEraIndex, accountId),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasStakers failed.')]);
+    }
 }
 
 // System
@@ -115,6 +130,18 @@ async function getSystemEvents(api, blockHash) {
 }
 
 // Custom
+async function getActiveEraIndex(api) {
+    let stakingActiveEra = await Promise.race([
+        getStakingActiveEra(api),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
+
+    try {
+        return stakingActiveEra.toJSON()['index'];
+    } catch (e) {
+        throw 'Function call to getStakingActiveEra failed.';
+    }
+}
+
 async function getSlashAmount(api, blockHash, accountAddress) {
     let events;
     try {
@@ -256,20 +283,21 @@ module.exports = {
                     return {'error': e.toString()};
                 }
             // Staking
-            case 'staking/currentElected':
+            case 'staking/activeEra':
                 try {
-                    return {'result': await getStakingCurrentElected(api)};
+                    return {'result': await getStakingActiveEra(api)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-            case 'staking/stakers':
+            case 'staking/erasStakers':
                 if (!param2) {
                     return {'error': 'You did not enter the stash account '
                             + 'address of the validator that needs to be '
                             + 'queried'};
                 }
                 try {
-                    return {'result': await getStakingStakers(api, param2)};
+                    return {'result': await getStakingErasStakers(api, param2,
+                            param3)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

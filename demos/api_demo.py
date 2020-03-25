@@ -148,15 +148,15 @@ print(r.text)
 # Staking
 print('Staking:')
 
-print('/api/query/staking/currentElected')
-r = requests.get(url=API_ENDPOINT + '/api/query/staking/currentElected',
+print('/api/query/staking/activeEra')
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/activeEra',
                  params={'websocket': websocket})
 print(r.text)
 
-print('/api/query/staking/stakers')
-r = requests.get(url=API_ENDPOINT + '/api/query/staking/stakers',
+print('/api/query/staking/erasStakers')
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasStakers',
                  params={'websocket': websocket,
-                         'account_address': 'DNDBcYD8zzqAoZEtgNzouVp2sVxsvqzD4UdB5WrAUwjqpL8'})
+                         'account_id': 'DNDBcYD8zzqAoZEtgNzouVp2sVxsvqzD4UdB5WrAUwjqpL8'})
 print(r.text)
 
 # System
@@ -168,7 +168,7 @@ r = requests.get(url=API_ENDPOINT + '/api/query/system/events',
 print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/query/system/events',
                  params={'websocket': websocket,
-                         'block_hash': '0xdfee729e21118c625573189df270659e4513732224726a217cf323114db8cccd'})
+                         'block_hash': '0x24397e1f3902962b1ab76e15aa6e3a990b9f8eda2b9877013391b975e16ec3b8'})
 print(r.text)
 
 print()
@@ -183,11 +183,22 @@ r = requests.get(url=API_ENDPOINT + '/api/custom/getSlashAmount',
 print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/custom/getSlashAmount',
                  params={'websocket': websocket,
-                         'block_hash': '0xdfee729e21118c625573189df270659e4513732224726a217cf323114db8cccd',
+                         'block_hash': '0x24397e1f3902962b1ab76e15aa6e3a990b9f8eda2b9877013391b975e16ec3b8',
                          'account_address': 'HsGrsqL4nCBCW2ovc4kKG98c4mFp99BHRFkBSRZW1ETDe3U'})
 print(r.text)
 
 print()
+
+# Derive
+print('Derive:')
+
+print('/api/derive/staking/validators')
+r = requests.get(url=API_ENDPOINT + '/api/derive/staking/validators',
+                 params={'websocket': websocket})
+print(r.text)
+
+print()
+
 # Misc
 print('Misc:')
 r = requests.get(url=API_ENDPOINT + '/api/query/session/validators',

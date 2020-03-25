@@ -5,6 +5,7 @@ const Timeout = require('await-timeout');
 
 const substrateRPC = require('./substrate_rpc_interface');
 const substrateQuery = require('./substrate_query_interface');
+const substrateDerive = require('./substrate_derive_interface');
 
 
 const TIMEOUT_TIME_MS = 10000;
@@ -83,7 +84,7 @@ async function startPolkadotAPI() {
 
     // Miscellaneous Endpoints
     app.get('/api/pingApi', async function (req, res) {
-        console.log('Received request for /api/pingApi');
+        console.log('Received request for %s', req.url);
         try {
             return res.status(REQUEST_SUCCESS_STATUS).send({'result': 'pong'});
         } catch (e) {
@@ -93,7 +94,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/pingNode', async function (req, res) {
-        console.log('Received request for /api/pingNode');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -119,7 +120,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/getConnectionsList', async function (req, res) {
-        console.log('Received request for /api/getConnectionsList');
+        console.log('Received request for %s', req.url);
         try {
             let websocket_api_list = [];
             // iterate over each key in the map of websocket_ip -> api
@@ -142,7 +143,7 @@ async function startPolkadotAPI() {
     // RPC API Endpoints
     // Chain
     app.get('/api/rpc/chain/getBlockHash', async function (req, res) {
-        console.log('Received request for /api/rpc/chain/getBlockHash');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -168,7 +169,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/rpc/chain/getFinalizedHead', async function (req, res) {
-        console.log('Received request for /api/rpc/chain/getFinalizedHead');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -192,7 +193,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/rpc/chain/getHeader', async function (req, res) {
-        console.log('Received request for /api/rpc/chain/getHeader');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -219,7 +220,7 @@ async function startPolkadotAPI() {
 
     // System
     app.get('/api/rpc/system/chain', async function (req, res) {
-        console.log('Received request for /api/rpc/system/chain');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -243,7 +244,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/rpc/system/health', async function (req, res) {
-        console.log('Received request for /api/rpc/system/health');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -269,7 +270,7 @@ async function startPolkadotAPI() {
     // Query API Endpoints
     // Council
     app.get('/api/query/council/members', async function (req, res) {
-        console.log('Received request for /api/query/council/members');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -293,7 +294,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/council/proposalCount', async function (req, res) {
-        console.log('Received request for /api/query/council/proposalCount');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -317,7 +318,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/council/proposalOf', async function (req, res) {
-        console.log('Received request for /api/query/council/proposalOf');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -343,7 +344,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/council/proposals', async function (req, res) {
-        console.log('Received request for /api/query/council/proposals');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -368,8 +369,7 @@ async function startPolkadotAPI() {
 
     // Democracy
     app.get('/api/query/democracy/publicPropCount', async function (req, res) {
-        console.log('Received request for ' +
-            '/api/query/democracy/publicPropCount');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -393,8 +393,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/democracy/referendumCount', async function (req, res) {
-        console.log('Received request for ' +
-            '/api/query/democracy/referendumCount');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -418,8 +417,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/democracy/referendumInfoOf', async function (req, res) {
-        console.log('Received request for ' +
-            '/api/query/democracy/referendumInfoOf');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -446,7 +444,7 @@ async function startPolkadotAPI() {
 
     // ImOnline
     app.get('/api/query/imOnline/authoredBlocks', async function (req, res) {
-        console.log('Received request for /api/query/imOnline/authoredBlocks');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -504,7 +502,7 @@ async function startPolkadotAPI() {
 
     // Session
     app.get('/api/query/session/currentIndex', async function (req, res) {
-        console.log('Received request for /api/query/session/currentIndex');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -553,7 +551,7 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/session/validators', async function (req, res) {
-        console.log('Received request for /api/query/session/validators');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -577,15 +575,15 @@ async function startPolkadotAPI() {
     });
 
     // Staking
-    app.get('/api/query/staking/currentElected', async function (req, res) {
-        console.log('Received request for /api/query/staking/currentElected');
+    app.get('/api/query/staking/activeEra', async function (req, res) {
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/currentElected");
+                    "staking/activeEra");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -601,17 +599,19 @@ async function startPolkadotAPI() {
         }
     });
 
-    app.get('/api/query/staking/stakers', async function (req, res) {
-        console.log('Received request for /api/query/staking/stakers');
+    app.get('/api/query/staking/erasStakers', async function (req, res) {
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
-            // extract the accountAddress passed in the query
-            const accountAddress = req.query.account_address;
+            // extract the accountId passed in the query
+            const accountId = req.query.account_id;
+            // extract the eraIndex passed in the query (optional)
+            const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/stakers", accountAddress);
+                    "staking/erasStakers", accountId, eraIndex);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -629,7 +629,7 @@ async function startPolkadotAPI() {
 
     // System
     app.get('/api/query/system/events', async function (req, res) {
-        console.log('Received request for /api/query/system/events');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -656,7 +656,7 @@ async function startPolkadotAPI() {
 
     // Custom Endpoints
     app.get('/api/custom/getSlashAmount', async function (req, res) {
-        console.log('Received request for /api/custom/getSlashAmount');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
@@ -668,6 +668,32 @@ async function startPolkadotAPI() {
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
                     "custom/getSlashAmount", blockHash, accountAddress);
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
+    // API Derive Endpoints
+    // Staking
+    app.get('/api/derive/staking/validators', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateDerive.deriveAPI(
+                    apis[websocket], "staking/validators");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

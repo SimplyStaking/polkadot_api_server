@@ -51,11 +51,13 @@ The API Server works as follows:
 | `/api/query/session/currentIndex` | `websocket` | None | `current index` |
 | `/api/query/session/disabledValidators` | `websocket` | None | List of `disabled validators` |
 | `/api/query/session/validators` | `websocket` | None | List of `validators` |
-| `/api/query/staking/currentElected` | `websocket` | None | List of `validators` which will be active in the `next session` |
-| `/api/query/staking/stakers` | `websocket`, `account_address` | None | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` |
+| `/api/query/staking/activeEra` | `websocket` | None | `index` and `start` of the `active era` |
+| `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the active one if it is not specified |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |
+| **Derive** | | | |
+| `/api/derive/staking/validators` | `websocket` | None | `nextElected` - List of `validators` which will be active in the `next session` and `validators` - List of `validators` which are currently active |
 
 ## Using the API
 For example, the endpoint `/api/rpc/system/health` can be called as follows: `http://localhost:3000/api/rpc/system/health?websocket=ws://1.2.3.4:9944`.

@@ -177,6 +177,45 @@ async function getSlashAmount(api, blockHash, accountAddress) {
     return slashAmount;
 }
 
+async function getStakingErasValidatorReward(api, eraIndex) {
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasValidatorReward(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasValidatorReward failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveErasValidatorReward failed.';
+        }
+        return await Promise.race([
+            api.query.staking.erasValidatorReward(activeEraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasValidatorReward failed.')]);
+    }
+}
+
+async function getStakingErasRewardPoints(api, eraIndex) {
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasRewardPoints(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasRewardPoints failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveErasRewardPoints failed.';
+        }
+        return await Promise.race([
+            api.query.staking.erasRewardPoints(activeEraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasRewardPoints failed.')]);
+    }
+}
 
 module.exports = {
     queryAPI: async function (api, param1=null, param2=null, param3=null) {
@@ -301,6 +340,21 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+
+            case 'staking/erasValidatorReward':                 
+                try {
+                    return {'result': await getStakingErasValidatorReward(api, param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+
+            case 'staking/erasRewardPoints':
+                try {
+                    return {'result': await getStakingErasRewardPoints(api, param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }            
+
             // System
             case 'system/events':
                 try {

@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.9.1
+
+Released on 7th April 2020
+
+Updated to @polkadot/api package v1.9.1
+
+### Additions:
+* `/api/query/staking/erasRewardPoints` has been added, which returns the `total` and `individual` rewards in the specified `era index`, or in the `active` one if it is not specified.
+* `/api/query/staking/erasValidatorReward` has been added, which returns the total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified.
+
 ## 1.8.1
 
 Released on 25th March 2020

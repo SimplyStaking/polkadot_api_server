@@ -153,11 +153,36 @@ r = requests.get(url=API_ENDPOINT + '/api/query/staking/activeEra',
                  params={'websocket': websocket})
 print(r.text)
 
+print('/api/query/staking/erasRewardPoints')
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasRewardPoints',
+                 params={'websocket': websocket})
+print(r.text)
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasRewardPoints',
+                 params={'websocket': websocket,
+                         'era_index': '630'})
+print(r.text)
+
+
 print('/api/query/staking/erasStakers')
 r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasStakers',
                  params={'websocket': websocket,
                          'account_id': 'DNDBcYD8zzqAoZEtgNzouVp2sVxsvqzD4UdB5WrAUwjqpL8'})
 print(r.text)
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasStakers',
+                 params={'websocket': websocket,
+                         'account_id': 'DNDBcYD8zzqAoZEtgNzouVp2sVxsvqzD4UdB5WrAUwjqpL8',
+                         'era_index': '630'})
+print(r.text)
+
+print('/api/query/staking/erasValidatorReward')
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasValidatorReward',
+                 params={'websocket': websocket})
+print(r.text)
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasValidatorReward',
+                 params={'websocket': websocket,
+                         'era_index': '630'})
+print(r.text)
+
 
 # System
 print('System:')

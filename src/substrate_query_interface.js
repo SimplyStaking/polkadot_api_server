@@ -93,6 +93,26 @@ async function getStakingActiveEra(api) {
         Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
+async function getStakingErasRewardPoints(api, eraIndex) {
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasRewardPoints(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasRewardPoints failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveEraIndex failed.';
+        }
+        return await Promise.race([
+            api.query.staking.erasRewardPoints(activeEraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasRewardPoints failed.')]);
+    }
+}
+
 async function getStakingErasStakers(api, accountId, eraIndex) {
     // check if eraIndex has been provided or not
     if (eraIndex) {
@@ -112,6 +132,26 @@ async function getStakingErasStakers(api, accountId, eraIndex) {
             api.query.staking.erasStakers(activeEraIndex, accountId),
             Timeout.set(TIMEOUT_TIME_MS,
                 'API call staking/erasStakers failed.')]);
+    }
+}
+
+async function getStakingErasValidatorReward(api, eraIndex) {
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasValidatorReward(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasValidatorReward failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveEraIndex failed.';
+        }
+        return await Promise.race([
+            api.query.staking.erasValidatorReward(activeEraIndex-1),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasValidatorReward failed.')]);
     }
 }
 
@@ -176,7 +216,6 @@ async function getSlashAmount(api, blockHash, accountAddress) {
     }
     return slashAmount;
 }
-
 
 module.exports = {
     queryAPI: async function (api, param1=null, param2=null, param3=null) {
@@ -289,6 +328,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+            case 'staking/erasRewardPoints':
+                try {
+                    return {'result': await getStakingErasRewardPoints(api,
+                            param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             case 'staking/erasStakers':
                 if (!param2) {
                     return {'error': 'You did not enter the stash account '
@@ -298,6 +344,13 @@ module.exports = {
                 try {
                     return {'result': await getStakingErasStakers(api, param2,
                             param3)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+            case 'staking/erasValidatorReward':                 
+                try {
+                    return {'result': await getStakingErasValidatorReward(api,
+                            param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

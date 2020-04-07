@@ -52,7 +52,9 @@ The API Server works as follows:
 | `/api/query/session/disabledValidators` | `websocket` | None | List of `disabled validators` |
 | `/api/query/session/validators` | `websocket` | None | List of `validators` |
 | `/api/query/staking/activeEra` | `websocket` | None | `index` and `start` of the `active era` |
-| `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the active one if it is not specified |
+| `/api/query/staking/erasRewardPoints` | `websocket` | `era_index` | The rewards in the specified `era index`, or in the `active` one if it is not specified  |
+| `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the `active` one if it is not specified |
+| `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified  |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |

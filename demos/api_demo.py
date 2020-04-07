@@ -107,7 +107,7 @@ print(r.text)
 print('/api/query/democracy/referendumInfoOf')
 r = requests.get(url=API_ENDPOINT + '/api/query/democracy/referendumInfoOf',
                  params={'websocket': websocket,
-                         'referendum_index': '1'})
+                         'referendum_index': '43'})
 print(r.text)
 
 # ImOnline

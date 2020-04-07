@@ -599,6 +599,32 @@ async function startPolkadotAPI() {
         }
     });
 
+    app.get('/api/query/staking/erasRewardPoints', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // extract the eraIndex passed in the query (optional)
+            const eraIndex = req.query.era_index;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "staking/erasRewardPoints", eraIndex);
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     app.get('/api/query/staking/erasStakers', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {
@@ -628,44 +654,16 @@ async function startPolkadotAPI() {
     });
 
     app.get('/api/query/staking/erasValidatorReward', async function (req, res) {
-        console.log('Received request for ' +
-            '/api/query/staking/erasValidatorReward');
+        console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
-            // extract the sessionIndex passed in the query
-            const sessionIndex = req.query.session_index;
+            // extract the eraIndex passed in the query (optional)
+            const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/erasValidatorReward", sessionIndex);
-                if ('result' in apiResult) {
-                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
-                } else {
-                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
-                }
-            } else {
-                return res.status(REQUEST_ERROR_STATUS).send(
-                    errorNeedToSetUpAPIMsg(websocket))
-            }
-        } catch (e) {
-            return res.status(REQUEST_ERROR_STATUS).send(
-                {'error': e.toString()});
-        }
-    });
-
-    app.get('/api/query/staking/erasRewardPoints', async function (req, res) {
-        console.log('Received request for ' +
-            '/api/query/staking/erasRewardPoints');
-        try {
-            // extract the web socket passed in the query
-            const websocket = req.query.websocket;
-            // extract the sessionIndex passed in the query
-            const sessionIndex = req.query.session_index;
-            // check whether an api has been connected for that websocket
-            if (websocket in apis){
-                const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/erasRewardPoints", sessionIndex);
+                    "staking/erasValidatorReward", eraIndex);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

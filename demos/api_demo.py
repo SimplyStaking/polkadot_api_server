@@ -51,6 +51,14 @@ r = requests.get(url=API_ENDPOINT + '/api/rpc/chain/getHeader',
                          'hash': '0xdd661348a4971e0cf75d89da69de01907e81070cb8099dddc12b611c18371679'})
 print(r.text)
 
+# RPC
+print('RPC:')
+
+print('/api/rpc/rpc/methods')
+r = requests.get(url=API_ENDPOINT + '/api/rpc/rpc/methods',
+                 params={'websocket': websocket})
+print(r.text)
+
 # System
 print('System:')
 
@@ -64,9 +72,27 @@ r = requests.get(url=API_ENDPOINT + '/api/rpc/system/health',
                  params={'websocket': websocket})
 print(r.text)
 
+print('/api/rpc/system/networkState')
+r = requests.get(url=API_ENDPOINT + '/api/rpc/system/networkState',
+                 params={'websocket': websocket})
+print(r.text)
+
+print('/api/rpc/system/properties')
+r = requests.get(url=API_ENDPOINT + '/api/rpc/system/properties',
+                 params={'websocket': websocket})
+print(r.text)
+
 print()
 
 # Query API
+# Balances
+print('Balances:')
+
+print('/api/query/balances/totalIssuance')
+r = requests.get(url=API_ENDPOINT + '/api/query/council/members',
+                 params={'websocket': websocket})
+print(r.text)
+
 # Council
 print('Council:')
 
@@ -171,6 +197,15 @@ print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasStakers',
                  params={'websocket': websocket,
                          'account_id': 'DNDBcYD8zzqAoZEtgNzouVp2sVxsvqzD4UdB5WrAUwjqpL8',
+                         'era_index': '630'})
+print(r.text)
+
+print('/api/query/staking/erasTotalStake')
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasTotalStake',
+                 params={'websocket': websocket})
+print(r.text)
+r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasTotalStake',
+                 params={'websocket': websocket,
                          'era_index': '630'})
 print(r.text)
 

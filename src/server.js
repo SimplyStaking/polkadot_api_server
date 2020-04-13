@@ -141,30 +141,6 @@ async function startPolkadotAPI() {
     });
 
     // RPC API Endpoints
-    // RPC
-    app.get('/api/rpc/rpc/methods', async function (req, res) {
-        console.log('Received request for %s', req.url);
-        try {
-            // extract the web socket passed in the query
-            const websocket = req.query.websocket;
-            // check whether an api has been connected for that websocket
-            if (websocket in apis){
-                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
-                    "rpc/methods");
-                if ('result' in apiResult) {
-                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
-                } else {
-                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
-                }
-            } else {
-                return res.status(REQUEST_ERROR_STATUS).send(
-                    errorNeedToSetUpAPIMsg(websocket))
-            }
-        } catch (e) {
-            return res.status(REQUEST_ERROR_STATUS).send(
-                {'error': e.toString()});
-        }
-    });
     // Chain
     app.get('/api/rpc/chain/getBlockHash', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -242,6 +218,31 @@ async function startPolkadotAPI() {
         }
     });
 
+    // RPC
+    app.get('/api/rpc/rpc/methods', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "rpc/methods");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // System
     app.get('/api/rpc/system/chain', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -252,55 +253,6 @@ async function startPolkadotAPI() {
             if (websocket in apis){
                 const apiResult = await substrateRPC.rpcAPI(apis[websocket],
                     "system/chain");
-                if ('result' in apiResult) {
-                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
-                } else {
-                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
-                }
-            } else {
-                return res.status(REQUEST_ERROR_STATUS).send(
-                    errorNeedToSetUpAPIMsg(websocket))
-            }
-        } catch (e) {
-            return res.status(REQUEST_ERROR_STATUS).send(
-                {'error': e.toString()});
-        }
-    });
-
-    app.get('/api/rpc/system/networkState', async function (req, res) {
-        console.log('Received request for %s', req.url);
-        try {
-            // extract the web socket passed in the query
-            const websocket = req.query.websocket;
-            // check whether an api has been connected for that websocket
-            if (websocket in apis){
-                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
-                    "system/networkState");
-                if ('result' in apiResult) {
-                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
-                } else {
-                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
-                }
-            } else {
-                return res.status(REQUEST_ERROR_STATUS).send(
-                    errorNeedToSetUpAPIMsg(websocket))
-            }
-        } catch (e) {
-            return res.status(REQUEST_ERROR_STATUS).send(
-                {'error': e.toString()});
-        }
-    });
-
-
-    app.get('/api/rpc/system/properties', async function (req, res) {
-        console.log('Received request for %s', req.url);
-        try {
-            // extract the web socket passed in the query
-            const websocket = req.query.websocket;
-            // check whether an api has been connected for that websocket
-            if (websocket in apis){
-                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
-                    "system/properties");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -340,7 +292,80 @@ async function startPolkadotAPI() {
         }
     });
 
+    app.get('/api/rpc/system/networkState', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "system/networkState");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+    
+    app.get('/api/rpc/system/properties', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "system/properties");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // Query API Endpoints
+    // Balances
+    app.get('/api/query/balances/totalIssuance', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "balances/totalIssuance");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // Council
     app.get('/api/query/council/members', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -425,30 +450,6 @@ async function startPolkadotAPI() {
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
                     "council/proposals");
-                if ('result' in apiResult) {
-                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
-                } else {
-                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
-                }
-            } else {
-                return res.status(REQUEST_ERROR_STATUS).send(
-                    errorNeedToSetUpAPIMsg(websocket))
-            }
-        } catch (e) {
-            return res.status(REQUEST_ERROR_STATUS).send(
-                {'error': e.toString()});
-        }
-    });
-
-    app.get('/api/query/balances/totalIssauance', async function (req, res) {
-        console.log('Received request for %s', req.url);
-        try {
-            // extract the web socket passed in the query
-            const websocket = req.query.websocket;
-            // check whether an api has been connected for that websocket
-            if (websocket in apis){
-                const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "balances/totalIssauance");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -750,7 +751,7 @@ async function startPolkadotAPI() {
         }
     });
 
-    app.get('/api/query/staking/erasValidatorReward', async function (req, res) {
+    app.get('/api/query/staking/erasTotalStake', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
@@ -760,7 +761,7 @@ async function startPolkadotAPI() {
             // check whether an api has been connected for that websocket
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/erasValidatorReward", eraIndex);
+                    "staking/erasTotalStake", eraIndex);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -776,7 +777,7 @@ async function startPolkadotAPI() {
         }
     });
 
-    app.get('/api/query/staking/erasTotalStake', async function (req, res) {
+    app.get('/api/query/staking/erasValidatorReward', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
@@ -786,7 +787,7 @@ async function startPolkadotAPI() {
             // check whether an api has been connected for that websocket
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
-                    "staking/erasTotalStake", eraIndex);
+                    "staking/erasValidatorReward", eraIndex);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

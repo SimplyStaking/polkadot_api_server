@@ -3,6 +3,14 @@ const Timeout = require('await-timeout');
 const TIMEOUT_TIME_MS = 10000;
 
 // From: https://polkadot.js.org/api/substrate/storage.html
+// Balances
+async function getBalancesTotalIssuance(api) {
+    return await Promise.race([
+        api.query.balances.totalIssuance(),
+        Timeout.set(TIMEOUT_TIME_MS,
+            'API call balances/totalIssuance failed.')]);
+}
+
 // Council
 async function getCouncilMembers(api) {
     return await Promise.race([
@@ -135,6 +143,28 @@ async function getStakingErasStakers(api, accountId, eraIndex) {
     }
 }
 
+async function getStakingErasTotalStake(api, eraIndex) {
+    // check if eraIndex has been provided or not
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasTotalStake(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasStakers failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveEraIndex failed.';
+        }
+
+        return await Promise.race([
+            api.query.staking.erasTotalStake(activeEraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasTotalStake failed.')]);
+    }
+}
+
 async function getStakingErasValidatorReward(api, eraIndex) {
     if (eraIndex) {
         return await Promise.race([
@@ -155,28 +185,6 @@ async function getStakingErasValidatorReward(api, eraIndex) {
     }
 }
 
-async function getErasTotalStake(api, eraIndex) {
-    // check if eraIndex has been provided or not
-    if (eraIndex) {
-        return await Promise.race([
-            api.query.staking.erasTotalStake(eraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasStakers failed.')]);
-    } else {
-        let activeEraIndex;
-        try {
-            activeEraIndex = await getActiveEraIndex(api);
-        } catch (e) {
-            throw 'Function call to getActiveEraIndex failed.';
-        }
-
-        return await Promise.race([
-            api.query.staking.erasTotalStake(activeEraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasStakers failed.')]);
-    }
-}
-
 // System
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
@@ -189,13 +197,6 @@ async function getSystemEvents(api, blockHash) {
             api.query.system.events(),
             Timeout.set(TIMEOUT_TIME_MS, 'API call system/events failed.')]);
     }
-}
-
-// Balances
-async function getTotalIssuance(api) {
-    return await Promise.race([
-        api.query.balances.totalIssuance(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
 // Custom
@@ -246,9 +247,17 @@ async function getSlashAmount(api, blockHash, accountAddress) {
     return slashAmount;
 }
 
+
 module.exports = {
     queryAPI: async function (api, param1=null, param2=null, param3=null) {
         switch (param1) {
+            // Balances
+            case 'balances/totalIssuance':
+                try {
+                    return {'result': await getBalancesTotalIssuance(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             // Council
             case 'council/members':
                 try {
@@ -376,6 +385,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+            case 'staking/erasTotalStake':
+                try {
+                    return {'result': await getStakingErasTotalStake(api,
+                            param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             case 'staking/erasValidatorReward':                 
                 try {
                     return {'result': await getStakingErasValidatorReward(api,
@@ -383,13 +399,6 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-            case 'staking/erasTotalStake':                 
-                try {
-                    return {'result': await getErasTotalStake(api,
-                            param2)};
-                } catch (e) {
-                    return {'error': e.toString()};
-                }    
             // System
             case 'system/events':
                 try {
@@ -397,14 +406,6 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-            // Balances
-            case 'balances/totalIssauance':
-                try {
-                    return {'result': await getTotalIssuance(api)};
-                } catch (e) {
-                    return {'error': e.toString()};
-                }
-
             // Custom Endpoints
             case 'custom/getSlashAmount':
                 try {

@@ -39,6 +39,13 @@ async function getChainGetHeader(api, hash){
     }
 }
 
+// RPC
+async function getRPCMethods(api){
+    return await Promise.race([
+        api.rpc.rpc.methods(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call rpc/methods failed.')]);
+}
+
 // System
 async function getSystemChain(api){
     return await Promise.race([
@@ -53,35 +60,22 @@ async function getSystemHealth(api){
 }
 
 
-async function getNetworkState(api){
+async function getSystemNetworkState(api){
     return await Promise.race([
         api.rpc.system.networkState(),
         Timeout.set(TIMEOUT_TIME_MS, 'API call system/networkState failed.')]);
 }
 
-async function getProperties(api){
+async function getSystemProperties(api){
     return await Promise.race([
         api.rpc.system.properties(),
         Timeout.set(TIMEOUT_TIME_MS, 'API call system/properties failed.')]);
-}
-
-async function getMethods(api){
-    return await Promise.race([
-        api.rpc.rpc.methods(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call system/methods failed.')]);
 }
 
 
 module.exports = {
     rpcAPI: async function (api, param1=null, param2=null) {
         switch (param1) {
-            //  rpc
-            case 'rpc/methods':
-                try {
-                    return {'result': await getMethods(api, param2)};
-                } catch (e) {
-                    return {'error': e.toString()}
-                }
             // Chain
             case 'chain/getBlockHash':
                 try {
@@ -101,6 +95,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()}
                 }
+            // RPC
+            case 'rpc/methods':
+                try {
+                    return {'result': await getRPCMethods(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
             // System
             case 'system/chain':
                 try {
@@ -116,13 +117,13 @@ module.exports = {
                 }
             case 'system/networkState':
                 try {
-                    return {'result': await getNetworkState(api)};
+                    return {'result': await getSystemNetworkState(api)};
                 } catch (e) {
                     return {'error': e.toString()}
                 }
             case 'system/properties':
                 try {
-                    return {'result': await getProperties(api)};
+                    return {'result': await getSystemProperties(api)};
                 } catch (e) {
                     return {'error': e.toString()}
                 }

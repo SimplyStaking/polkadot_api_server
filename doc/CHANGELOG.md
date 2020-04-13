@@ -1,5 +1,14 @@
 # Change Log
 
+## Unreleased
+
+### Additions:
+* `/api/rpc/rpc/methods` has been added, which returns the `version` and `methods`, a list of RPC methods that are exposed by the node.
+* `/api/rpc/system/networkState` has been added, which returns the current state of the network, namely the `peerId`, `listenedAddresses`, `externalAddresses` and `connectedPeers` for the specified node.
+* `/api/rpc/system/properties` has been added, which returns the properties defined in the chain spec, namely the `ss58Format`, `tokenDecimals` and `tokenSymbol` for the network of the specified node.
+* `/api/query/balances/totalIssuance` has been added, which returns the total amount of units issued in the chain. Value may be in Hex.
+* `/api/query/staking/erasTotalStake` has been added, which returns the total amount staked in the specified `era index`, or in the `active` one if it is not specified. Value may be in Hex.
+
 ## 1.9.1
 
 Released on 7th April 2020

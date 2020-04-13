@@ -89,7 +89,7 @@ print()
 print('Balances:')
 
 print('/api/query/balances/totalIssuance')
-r = requests.get(url=API_ENDPOINT + '/api/query/council/members',
+r = requests.get(url=API_ENDPOINT + '/api/query/balances/totalIssuance',
                  params={'websocket': websocket})
 print(r.text)
 

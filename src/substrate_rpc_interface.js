@@ -53,9 +53,35 @@ async function getSystemHealth(api){
 }
 
 
+async function getNetworkState(api){
+    return await Promise.race([
+        api.rpc.system.networkState(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call system/networkState failed.')]);
+}
+
+async function getProperties(api){
+    return await Promise.race([
+        api.rpc.system.properties(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call system/properties failed.')]);
+}
+
+async function getMethods(api){
+    return await Promise.race([
+        api.rpc.rpc.methods(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call system/methods failed.')]);
+}
+
+
 module.exports = {
     rpcAPI: async function (api, param1=null, param2=null) {
         switch (param1) {
+            //  rpc
+            case 'rpc/methods':
+                try {
+                    return {'result': await getMethods(api, param2)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
             // Chain
             case 'chain/getBlockHash':
                 try {
@@ -85,6 +111,18 @@ module.exports = {
             case 'system/health':
                 try {
                     return {'result': await getSystemHealth(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
+            case 'system/networkState':
+                try {
+                    return {'result': await getNetworkState(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
+            case 'system/properties':
+                try {
+                    return {'result': await getProperties(api)};
                 } catch (e) {
                     return {'error': e.toString()}
                 }

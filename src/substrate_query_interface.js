@@ -155,6 +155,28 @@ async function getStakingErasValidatorReward(api, eraIndex) {
     }
 }
 
+async function getErasTotalStake(api, eraIndex) {
+    // check if eraIndex has been provided or not
+    if (eraIndex) {
+        return await Promise.race([
+            api.query.staking.erasTotalStake(eraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasStakers failed.')]);
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            throw 'Function call to getActiveEraIndex failed.';
+        }
+
+        return await Promise.race([
+            api.query.staking.erasTotalStake(activeEraIndex),
+            Timeout.set(TIMEOUT_TIME_MS,
+                'API call staking/erasStakers failed.')]);
+    }
+}
+
 // System
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
@@ -167,6 +189,13 @@ async function getSystemEvents(api, blockHash) {
             api.query.system.events(),
             Timeout.set(TIMEOUT_TIME_MS, 'API call system/events failed.')]);
     }
+}
+
+// Balances
+async function getTotalIssuance(api) {
+    return await Promise.race([
+        api.query.balances.totalIssuance(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
 // Custom
@@ -354,6 +383,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+            case 'staking/erasTotalStake':                 
+                try {
+                    return {'result': await getErasTotalStake(api,
+                            param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }    
             // System
             case 'system/events':
                 try {
@@ -361,6 +397,14 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+            // Balances
+            case 'balances/totalIssauance':
+                try {
+                    return {'result': await getTotalIssuance(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+
             // Custom Endpoints
             case 'custom/getSlashAmount':
                 try {

@@ -36,9 +36,13 @@ The API Server works as follows:
 | `/api/rpc/chain/getBlockHash` | `websocket` | `block_number` | `block hash` of the specified block, or of the latest block if one is not specified |
 | `/api/rpc/chain/getFinalizedHead` | `websocket` | None | `block hash` |
 | `/api/rpc/chain/getHeader` | `websocket` | `hash` | `header` of the specified block hash, or of the latest block if the hash is not specified |
+| `/api/rpc/rpc/methods` | `websocket` | None | `version` and `methods`, a list of RPC methods that are exposed by the node |
 | `/api/rpc/system/chain` | `websocket` | None | `system chain` |
 | `/api/rpc/system/health` | `websocket` | None | `system health` - `peers`, `isSyncing` |
+| `/api/rpc/system/networkState` | `websocket` | None | `peerId`, `listenedAddresses`, `externalAddresses` and `connectedPeers` for the specified node. The current state of the network |
+| `/api/rpc/system/properties` | `websocket` | None | `ss58Format`, `tokenDecimals` and `tokenSymbol` for the network of the specified node. Properties defined in the chain spec |
 | **Query** | | | |
+| `/api/query/balances/totalIssuance` | `websocket` | None | The total amount of units issued in the chain. Value may be in Hex |
 | `/api/query/council/members` | `websocket` | None | List of `council members` |
 | `/api/query/council/proposalCount` | `websocket` | None | Number of `proposals` |
 | `/api/query/council/proposalOf` | `websocket`, `hash` | None | `proposal info` - `end`, `proposalHash`, `treshold`, `delay` |
@@ -52,9 +56,10 @@ The API Server works as follows:
 | `/api/query/session/disabledValidators` | `websocket` | None | List of `disabled validators` |
 | `/api/query/session/validators` | `websocket` | None | List of `validators` |
 | `/api/query/staking/activeEra` | `websocket` | None | `index` and `start` of the `active era` |
-| `/api/query/staking/erasRewardPoints` | `websocket` | `era_index` | The `total` and `individual` rewards in the specified `era index`, or in the `active` one if it is not specified  |
+| `/api/query/staking/erasRewardPoints` | `websocket` | `era_index` | The `total` and `individual` rewards in the specified `era index`, or in the `active` one if it is not specified |
 | `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the `active` one if it is not specified |
-| `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified  |
+| `/api/query/staking/erasTotalStake` | `websocket` | `era_index` | The total amount staked in the specified `era index`, or in the `active` one if it is not specified. Value may be in Hex |
+| `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |

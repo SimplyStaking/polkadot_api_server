@@ -218,6 +218,31 @@ async function startPolkadotAPI() {
         }
     });
 
+    // RPC
+    app.get('/api/rpc/rpc/methods', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "rpc/methods");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // System
     app.get('/api/rpc/system/chain', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -267,7 +292,80 @@ async function startPolkadotAPI() {
         }
     });
 
+    app.get('/api/rpc/system/networkState', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "system/networkState");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+    
+    app.get('/api/rpc/system/properties', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateRPC.rpcAPI(apis[websocket],
+                    "system/properties");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // Query API Endpoints
+    // Balances
+    app.get('/api/query/balances/totalIssuance', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "balances/totalIssuance");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // Council
     app.get('/api/query/council/members', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -638,6 +736,32 @@ async function startPolkadotAPI() {
             if (websocket in apis){
                 const apiResult = await substrateQuery.queryAPI(apis[websocket],
                     "staking/erasStakers", accountId, eraIndex);
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
+    app.get('/api/query/staking/erasTotalStake', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // extract the eraIndex passed in the query (optional)
+            const eraIndex = req.query.era_index;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "staking/erasTotalStake", eraIndex);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

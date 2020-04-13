@@ -39,6 +39,13 @@ async function getChainGetHeader(api, hash){
     }
 }
 
+// RPC
+async function getRPCMethods(api){
+    return await Promise.race([
+        api.rpc.rpc.methods(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call rpc/methods failed.')]);
+}
+
 // System
 async function getSystemChain(api){
     return await Promise.race([
@@ -50,6 +57,19 @@ async function getSystemHealth(api){
     return await Promise.race([
         api.rpc.system.health(),
         Timeout.set(TIMEOUT_TIME_MS, 'API call system/health failed.')]);
+}
+
+
+async function getSystemNetworkState(api){
+    return await Promise.race([
+        api.rpc.system.networkState(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call system/networkState failed.')]);
+}
+
+async function getSystemProperties(api){
+    return await Promise.race([
+        api.rpc.system.properties(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call system/properties failed.')]);
 }
 
 
@@ -75,6 +95,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()}
                 }
+            // RPC
+            case 'rpc/methods':
+                try {
+                    return {'result': await getRPCMethods(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
             // System
             case 'system/chain':
                 try {
@@ -85,6 +112,18 @@ module.exports = {
             case 'system/health':
                 try {
                     return {'result': await getSystemHealth(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
+            case 'system/networkState':
+                try {
+                    return {'result': await getSystemNetworkState(api)};
+                } catch (e) {
+                    return {'error': e.toString()}
+                }
+            case 'system/properties':
+                try {
+                    return {'result': await getSystemProperties(api)};
                 } catch (e) {
                     return {'error': e.toString()}
                 }

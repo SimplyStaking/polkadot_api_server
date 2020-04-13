@@ -1,6 +1,10 @@
 # Change Log
 
-## Unreleased
+## 1.10.1
+
+Released on 13th April 2020
+
+Updated to @polkadot/api package v1.10.1
 
 ### Additions:
 * `/api/rpc/rpc/methods` has been added, which returns the `version` and `methods`, a list of RPC methods that are exposed by the node.

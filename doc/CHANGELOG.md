@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.13.1
+
+Released on 7th May 2020
+
+Updated to @polkadot/api package v1.13.1
+
 ## 1.11.1
 
 Released on 28th April 2020

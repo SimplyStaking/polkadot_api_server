@@ -112,7 +112,8 @@ async function getStakingErasRewardPoints(api, eraIndex) {
         try {
             activeEraIndex = await getActiveEraIndex(api);
         } catch (e) {
-            throw 'Function call to getActiveEraIndex failed.';
+            console.log('Function call to getActiveEraIndex failed.');
+            throw 'API call staking/erasRewardPoints failed.';
         }
         return await Promise.race([
             api.query.staking.erasRewardPoints(activeEraIndex),
@@ -133,7 +134,8 @@ async function getStakingErasStakers(api, accountId, eraIndex) {
         try {
             activeEraIndex = await getActiveEraIndex(api);
         } catch (e) {
-            throw 'Function call to getActiveEraIndex failed.';
+            console.log('Function call to getActiveEraIndex failed.');
+            throw 'API call staking/erasStakers failed.';
         }
 
         return await Promise.race([
@@ -155,7 +157,8 @@ async function getStakingErasTotalStake(api, eraIndex) {
         try {
             activeEraIndex = await getActiveEraIndex(api);
         } catch (e) {
-            throw 'Function call to getActiveEraIndex failed.';
+            console.log('Function call to getActiveEraIndex failed.');
+            throw 'API call staking/erasTotalStake failed.';
         }
 
         return await Promise.race([
@@ -176,7 +179,8 @@ async function getStakingErasValidatorReward(api, eraIndex) {
         try {
             activeEraIndex = await getActiveEraIndex(api);
         } catch (e) {
-            throw 'Function call to getActiveEraIndex failed.';
+            console.log('Function call to getActiveEraIndex failed.');
+            throw 'API call staking/erasValidatorReward failed.';
         }
         return await Promise.race([
             api.query.staking.erasValidatorReward(activeEraIndex-1),
@@ -201,14 +205,15 @@ async function getSystemEvents(api, blockHash) {
 
 // Custom
 async function getActiveEraIndex(api) {
-    let stakingActiveEra = await Promise.race([
+    let activeEra = await Promise.race([
         getStakingActiveEra(api),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
+        Timeout.set(TIMEOUT_TIME_MS,
+            'API call custom/getActiveEraIndex failed.')]);
 
     try {
-        return stakingActiveEra.toJSON()['index'];
+        return activeEra.toJSON()['index'];
     } catch (e) {
-        throw 'Function call to getStakingActiveEra failed.';
+        throw 'API call custom/getActiveEraIndex failed.';
     }
 }
 

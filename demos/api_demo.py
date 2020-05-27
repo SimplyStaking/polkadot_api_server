@@ -215,7 +215,7 @@ r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasValidatorReward',
 print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/query/staking/erasValidatorReward',
                  params={'websocket': websocket,
-                         'era_index': '630'})
+                         'era_index': '840'})
 print(r.text)
 
 
@@ -228,7 +228,7 @@ r = requests.get(url=API_ENDPOINT + '/api/query/system/events',
 print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/query/system/events',
                  params={'websocket': websocket,
-                         'block_hash': '0x24397e1f3902962b1ab76e15aa6e3a990b9f8eda2b9877013391b975e16ec3b8'})
+                         'block_hash': '0x1511c16054f1beaa4995cf8c637d6450f1a77acfa40f9f3f51579bba2b92a6c7'})
 print(r.text)
 
 print()
@@ -243,7 +243,7 @@ r = requests.get(url=API_ENDPOINT + '/api/custom/getSlashAmount',
 print(r.text)
 r = requests.get(url=API_ENDPOINT + '/api/custom/getSlashAmount',
                  params={'websocket': websocket,
-                         'block_hash': '0x24397e1f3902962b1ab76e15aa6e3a990b9f8eda2b9877013391b975e16ec3b8',
+                         'block_hash': '0x1511c16054f1beaa4995cf8c637d6450f1a77acfa40f9f3f51579bba2b92a6c7',
                          'account_address': 'HsGrsqL4nCBCW2ovc4kKG98c4mFp99BHRFkBSRZW1ETDe3U'})
 print(r.text)
 

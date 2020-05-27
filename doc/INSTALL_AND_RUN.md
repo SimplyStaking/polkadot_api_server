@@ -6,11 +6,11 @@ You can check the latest version of the `@polkadot/api` JavaScript package from 
 ## Configuring the Nodes
 In order for the API to be able to retrieve data from the Substrate/Polkadot Nodes, the nodes must be run with the following flags (in addition to any other flags you would like to use):
 ```bash
---pruning=archive --rpc-port=9933 --rpc-external --ws-port=9944 --ws-external
+--pruning=archive --ws-port=9944 --ws-external
 ```
 As of v0.7.10, the Validator must be run with these flags instead:
 ```bash
---pruning=archive --rpc-port=9933 --unsafe-rpc-external --ws-port=9944 --unsafe-ws-external
+--pruning=archive --ws-port=9944 --unsafe-ws-external
 ```
 
 ## Configuring the API
@@ -140,13 +140,13 @@ git clone https://github.com/SimplyVC/polkadot_api_server
 Then run the following commands to build the image:
 ```bash
 cd polkadot_api_server
-docker build -t simplyvc/polkadot_api_server:1.13.1 .
+docker build -t simplyvc/polkadot_api_server:1.16.1 .
 ```
 
 ##### Downloading the Pre-Built Docker Image from DockerHub
 The pre-built Docker image can simply be downloaded by running the following command:
 ```bash
-docker pull simplyvc/polkadot_api_server:1.13.1
+docker pull simplyvc/polkadot_api_server:1.16.1
 ```
 
 #### Config Files Directory and Permissions
@@ -167,7 +167,7 @@ Now that the Docker image is on your machine, and you have written configuration
 ```bash
 docker run -p 3000:3000 \
     -v <CONFIG_DIR>:/opt/polkadot_api_server/config:ro \
-    -d simplyvc/polkadot_api_server:1.13.1
+    -d simplyvc/polkadot_api_server:1.16.1
 ```
 
 Note: The port after `-p` and before the `:` can be used to route a port from the machine to the internal port of the Docker. If changing this, any program which refers to the API Docker container must refer to this port.\

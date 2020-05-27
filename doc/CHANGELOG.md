@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.16.1
+
+Released on 27th May 2020
+
+Updated @polkadot/api and @polkadot/api-derive packages to v1.16.1
+Updated error logging for API calls with nested calls to other endpoints
+
 ## 1.13.1
 
 Released on 7th May 2020

@@ -6,11 +6,11 @@ You can check the latest version of the `@polkadot/api` JavaScript package from 
 ## Configuring the Nodes
 In order for the API to be able to retrieve data from the Substrate/Polkadot Nodes, the nodes must be run with the following flags (in addition to any other flags you would like to use):
 ```bash
---pruning=archive --rpc-port=9933 --rpc-external --ws-port=9944 --ws-external
+--pruning=archive --ws-port=9944 --ws-external
 ```
 As of v0.7.10, the Validator must be run with these flags instead:
 ```bash
---pruning=archive --rpc-port=9933 --unsafe-rpc-external --ws-port=9944 --unsafe-ws-external
+--pruning=archive --ws-port=9944 --unsafe-ws-external
 ```
 
 ## Configuring the API

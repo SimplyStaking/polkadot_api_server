@@ -1,11 +1,12 @@
 const express = require('express');
 const ConfigParser = require('configparser');
 const {ApiPromise, WsProvider} = require('@polkadot/api');
-const Timeout = require('await-timeout');
+// const Timeout = require('await-timeout');
 
-const substrateRPC = require('./substrate_rpc_interface');
-const substrateQuery = require('./substrate_query_interface');
-const substrateDerive = require('./substrate_derive_interface');
+const substrateRPC = require('./interface/substrate_rpc');
+const substrateQuery = require('./interface/substrate_query');
+const substrateDerive = require('./interface/substrate_derive');
+const timeoutUtils = require('./utils/timeout');
 
 
 const TIMEOUT_TIME_MS = 10000;
@@ -24,12 +25,10 @@ async function startListen(websocket) {
         // connect to the WebSocket once and reuse that connection
         let provider = new WsProvider(websocket);
         // open an API connection with the provider
-        const api = await Promise.race([
-            ApiPromise.create({provider}),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'Connection could not be established.')]);
-        // return the api
-        return api;
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            ApiPromise.create, [{provider}], TIMEOUT_TIME_MS,
+            'Connection could not be established.'
+        );
     } catch (e) {
         console.log(e.toString());
     }
@@ -315,7 +314,7 @@ async function startPolkadotAPI() {
                 {'error': e.toString()});
         }
     });
-    
+
     app.get('/api/rpc/system/properties', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {

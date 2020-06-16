@@ -1,7 +1,6 @@
 const express = require('express');
 const ConfigParser = require('configparser');
 const {ApiPromise, WsProvider} = require('@polkadot/api');
-// const Timeout = require('await-timeout');
 
 const substrateRPC = require('./interface/substrate_rpc');
 const substrateQuery = require('./interface/substrate_query');

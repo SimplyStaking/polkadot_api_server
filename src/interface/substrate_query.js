@@ -1,112 +1,118 @@
-const Timeout = require('await-timeout');
+const timeoutUtils = require('../utils/timeout');
 
 const TIMEOUT_TIME_MS = 10000;
 
 // From: https://polkadot.js.org/api/substrate/storage.html
 // Balances
 async function getBalancesTotalIssuance(api) {
-    return await Promise.race([
-        api.query.balances.totalIssuance(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call balances/totalIssuance failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.balances.totalIssuance, [], TIMEOUT_TIME_MS,
+        'API call balances/totalIssuance failed.'
+    );
 }
 
 // Council
 async function getCouncilMembers(api) {
-    return await Promise.race([
-        api.query.council.members(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call council/members failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.council.members, [], TIMEOUT_TIME_MS,
+        'API call council/members failed.'
+    );
 }
 
 async function getCouncilProposalCount(api) {
-    return await Promise.race([
-        api.query.council.proposalCount(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call council/proposalCount failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.council.proposalCount, [], TIMEOUT_TIME_MS,
+        'API call council/proposalCount failed.'
+    );
 }
 
 async function getCouncilProposalOf(api, hash) {
-    return await Promise.race([
-        api.query.council.proposalOf(hash),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call council/proposalOf failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.council.proposalOf, [hash], TIMEOUT_TIME_MS,
+        'API call council/proposalOf failed.'
+    );
 }
 
 async function getCouncilProposals(api) {
-    return await Promise.race([
-        api.query.council.proposals(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call council/proposals failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.council.proposals, [], TIMEOUT_TIME_MS,
+        'API call council/proposals failed.'
+    );
 }
 
 // Democracy
 async function getDemocracyPublicPropCount(api) {
-    return await Promise.race([
-        api.query.democracy.publicPropCount(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call democracy/publicPropCount failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.democracy.publicPropCount, [], TIMEOUT_TIME_MS,
+        'API call democracy/publicPropCount failed.'
+    );
 }
 
 async function getDemocracyReferendumCount(api) {
-    return await Promise.race([
-        api.query.democracy.referendumCount(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call democracy/referendumCount failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.democracy.referendumCount, [], TIMEOUT_TIME_MS,
+        'API call democracy/referendumCount failed.'
+    );
 }
 
 async function getDemocracyReferendumInfoOf(api, referendumIndex) {
-    return await Promise.race([
-        api.query.democracy.referendumInfoOf(referendumIndex),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call democracy/referendumInfoOf failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.democracy.referendumInfoOf, [referendumIndex],
+        TIMEOUT_TIME_MS, 'API call democracy/referendumInfoOf failed.'
+    );
 }
 
 // ImOnline
 async function getImOnlineAuthoredBlocks(api, sessionIndex, validatorId) {
-    return await Promise.race([
-        api.query.imOnline.authoredBlocks(sessionIndex, validatorId),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call imOnline/authoredBlocks failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.imOnline.authoredBlocks, [sessionIndex, validatorId],
+        TIMEOUT_TIME_MS, 'API call imOnline/authoredBlocks failed.'
+    );
 }
 
 async function getImOnlineReceivedHeartBeats(api, sessionIndex, authIndex) {
-    return await Promise.race([
-        api.query.imOnline.receivedHeartbeats(sessionIndex, authIndex),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call imOnline/receivedHeartbeats failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.imOnline.receivedHeartbeats, [sessionIndex, authIndex],
+        TIMEOUT_TIME_MS, 'API call imOnline/receivedHeartbeats failed.'
+    );
 }
 
 // Session
 async function getSessionCurrentIndex(api) {
-    return await Promise.race([
-        api.query.session.currentIndex(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call session/currentIndex failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.session.currentIndex, [], TIMEOUT_TIME_MS,
+        'API call session/currentIndex failed.'
+    );
 }
 
 async function getSessionDisabledValidators(api) {
-    return await Promise.race([
-        api.query.session.disabledValidators(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call session/disabledValidators failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.session.disabledValidators, [], TIMEOUT_TIME_MS,
+        'API call session/disabledValidators failed.'
+    );
 }
 
 async function getSessionValidators(api) {
-    return await Promise.race([
-        api.query.session.validators(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call session/validators failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.session.validators, [], TIMEOUT_TIME_MS,
+        'API call session/validators failed.'
+    );
 }
 
 // Staking
 async function getStakingActiveEra(api) {
-    return await Promise.race([
-        api.query.staking.activeEra(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.staking.activeEra, [], TIMEOUT_TIME_MS,
+        'API call staking/activeEra failed.'
+    );
 }
 
 async function getStakingErasRewardPoints(api, eraIndex) {
     if (eraIndex) {
-        return await Promise.race([
-            api.query.staking.erasRewardPoints(eraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasRewardPoints failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasRewardPoints, [eraIndex], TIMEOUT_TIME_MS,
+            'API call staking/erasRewardPoints failed.'
+        );
     } else {
         let activeEraIndex;
         try {
@@ -115,20 +121,20 @@ async function getStakingErasRewardPoints(api, eraIndex) {
             console.log('Function call to getActiveEraIndex failed.');
             throw 'API call staking/erasRewardPoints failed.';
         }
-        return await Promise.race([
-            api.query.staking.erasRewardPoints(activeEraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasRewardPoints failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasRewardPoints, [activeEraIndex],
+            TIMEOUT_TIME_MS, 'API call staking/erasRewardPoints failed.'
+        );
     }
 }
 
 async function getStakingErasStakers(api, accountId, eraIndex) {
     // check if eraIndex has been provided or not
     if (eraIndex) {
-        return await Promise.race([
-            api.query.staking.erasStakers(eraIndex, accountId),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasStakers failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasStakers, [eraIndex, accountId],
+            TIMEOUT_TIME_MS, 'API call staking/erasStakers failed.'
+        );
     } else {
         let activeEraIndex;
         try {
@@ -137,21 +143,20 @@ async function getStakingErasStakers(api, accountId, eraIndex) {
             console.log('Function call to getActiveEraIndex failed.');
             throw 'API call staking/erasStakers failed.';
         }
-
-        return await Promise.race([
-            api.query.staking.erasStakers(activeEraIndex, accountId),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasStakers failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasStakers, [activeEraIndex, accountId],
+            TIMEOUT_TIME_MS, 'API call staking/erasStakers failed.'
+        );
     }
 }
 
 async function getStakingErasTotalStake(api, eraIndex) {
     // check if eraIndex has been provided or not
     if (eraIndex) {
-        return await Promise.race([
-            api.query.staking.erasTotalStake(eraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasStakers failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasTotalStake, [eraIndex], TIMEOUT_TIME_MS,
+            'API call staking/erasStakers failed.'
+        );
     } else {
         let activeEraIndex;
         try {
@@ -160,20 +165,19 @@ async function getStakingErasTotalStake(api, eraIndex) {
             console.log('Function call to getActiveEraIndex failed.');
             throw 'API call staking/erasTotalStake failed.';
         }
-
-        return await Promise.race([
-            api.query.staking.erasTotalStake(activeEraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasTotalStake failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasTotalStake, [activeEraIndex], TIMEOUT_TIME_MS,
+            'API call staking/erasTotalStake failed.'
+        );
     }
 }
 
 async function getStakingErasValidatorReward(api, eraIndex) {
     if (eraIndex) {
-        return await Promise.race([
-            api.query.staking.erasValidatorReward(eraIndex),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasValidatorReward failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasValidatorReward, [eraIndex], TIMEOUT_TIME_MS,
+            'API call staking/erasValidatorReward failed.'
+        );
     } else {
         let activeEraIndex;
         try {
@@ -182,10 +186,10 @@ async function getStakingErasValidatorReward(api, eraIndex) {
             console.log('Function call to getActiveEraIndex failed.');
             throw 'API call staking/erasValidatorReward failed.';
         }
-        return await Promise.race([
-            api.query.staking.erasValidatorReward(activeEraIndex-1),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call staking/erasValidatorReward failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.erasValidatorReward, [activeEraIndex-1],
+            TIMEOUT_TIME_MS, 'API call staking/erasValidatorReward failed.'
+        );
     }
 }
 
@@ -193,23 +197,24 @@ async function getStakingErasValidatorReward(api, eraIndex) {
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
     if (blockHash) {
-        return await Promise.race([
-            api.query.system.events.at(blockHash),
-            Timeout.set(TIMEOUT_TIME_MS, 'API call system/events failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.system.events.at, [blockHash], TIMEOUT_TIME_MS,
+            'API call system/events failed.'
+        );
     } else {
-        return await Promise.race([
-            api.query.system.events(),
-            Timeout.set(TIMEOUT_TIME_MS, 'API call system/events failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.system.events, [], TIMEOUT_TIME_MS,
+            'API call system/events failed.'
+        );
     }
 }
 
 // Custom
 async function getActiveEraIndex(api) {
-    let activeEra = await Promise.race([
-        getStakingActiveEra(api),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call custom/getActiveEraIndex failed.')]);
-
+    let activeEra = await timeoutUtils.callFnWithTimeoutSafely(
+        getStakingActiveEra, [api], TIMEOUT_TIME_MS,
+        'API call custom/getActiveEraIndex failed.'
+    );
     try {
         return activeEra.toJSON()['index'];
     } catch (e) {
@@ -224,14 +229,11 @@ async function getSlashAmount(api, blockHash, accountAddress) {
     } catch (e) {
         throw 'API call custom/getSlashAmount failed.';
     }
-
     let slashAmount = 0;
-
     // check every event to look for a staking:Slash event
     for (const record of events) {
         // extract the event and the event types
         const event = record.event;
-
         // check if the current event is a staking:Slash event
         if (event.section == 'staking' && event.method == 'Slash') {
             const event_str = event.data.toString();
@@ -397,7 +399,7 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-            case 'staking/erasValidatorReward':                 
+            case 'staking/erasValidatorReward':
                 try {
                     return {'result': await getStakingErasValidatorReward(api,
                             param2)};

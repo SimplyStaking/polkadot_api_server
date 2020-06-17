@@ -1,4 +1,4 @@
-const Timeout = require('await-timeout');
+const timeoutUtils = require('../utils/timeout');
 
 const TIMEOUT_TIME_MS = 10000;
 
@@ -7,69 +7,74 @@ const TIMEOUT_TIME_MS = 10000;
 async function getChainGetBlockHash(api, blockNumber){
     // check if blockNumber has been provided or not
     if (blockNumber) {
-        return await Promise.race([
-            api.rpc.chain.getBlockHash(blockNumber),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call chain/getBlockHash failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.rpc.chain.getBlockHash, [blockNumber], TIMEOUT_TIME_MS,
+            'API call chain/getBlockHash failed.'
+        );
     } else {
-        return await Promise.race([
-            api.rpc.chain.getBlockHash(),
-            Timeout.set(TIMEOUT_TIME_MS,
-                'API call chain/getBlockHash failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.rpc.chain.getBlockHash, [], TIMEOUT_TIME_MS,
+            'API call chain/getBlockHash failed.'
+        );
     }
 }
 
 async function getChainGetFinalizedHead(api){
-    return await Promise.race([
-        api.rpc.chain.getFinalizedHead(),
-        Timeout.set(TIMEOUT_TIME_MS,
-            'API call chain/getFinalizedHead failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.chain.getFinalizedHead, [], TIMEOUT_TIME_MS,
+        'API call chain/getFinalizedHead failed.'
+    );
 }
 
 async function getChainGetHeader(api, hash){
     // check if hash has been provided or not
     if (hash) {
-        return await Promise.race([
-            api.rpc.chain.getHeader(hash),
-            Timeout.set(TIMEOUT_TIME_MS, 'API call chain/getHeader failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.rpc.chain.getHeader, [hash], TIMEOUT_TIME_MS,
+            'API call chain/getHeader failed.'
+        );
     } else {
-        return await Promise.race([
-            api.rpc.chain.getHeader(),
-            Timeout.set(TIMEOUT_TIME_MS, 'API call chain/getHeader failed.')]);
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.rpc.chain.getHeader, [], TIMEOUT_TIME_MS,
+            'API call chain/getHeader failed.'
+        );
     }
 }
 
 // RPC
 async function getRPCMethods(api){
-    return await Promise.race([
-        api.rpc.rpc.methods(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call rpc/methods failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.rpc.methods, [], TIMEOUT_TIME_MS, 'API call rpc/methods failed.'
+    );
 }
 
 // System
 async function getSystemChain(api){
-    return await Promise.race([
-        api.rpc.system.chain(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call system/chain failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.system.chain, [], TIMEOUT_TIME_MS,
+        'API call system/chain failed.'
+    );
 }
 
 async function getSystemHealth(api){
-    return await Promise.race([
-        api.rpc.system.health(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call system/health failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.system.health, [], TIMEOUT_TIME_MS,
+        'API call system/health failed.'
+    );
 }
 
-
 async function getSystemNetworkState(api){
-    return await Promise.race([
-        api.rpc.system.networkState(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call system/networkState failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.system.networkState, [], TIMEOUT_TIME_MS,
+        'API call system/networkState failed.'
+    );
 }
 
 async function getSystemProperties(api){
-    return await Promise.race([
-        api.rpc.system.properties(),
-        Timeout.set(TIMEOUT_TIME_MS, 'API call system/properties failed.')]);
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.rpc.system.properties, [], TIMEOUT_TIME_MS,
+        'API call system/properties failed.'
+    );
 }
 
 

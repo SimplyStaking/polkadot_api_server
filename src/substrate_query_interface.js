@@ -101,6 +101,18 @@ async function getStakingActiveEra(api) {
         Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
+async function getEraElectionStatus(api) {
+    return await Promise.race([
+        api.query.staking.eraElectionStatus(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/eraElectionStatus failed.')]);
+}
+
+async function getForceEra(api) {
+    return await Promise.race([
+        api.query.staking.forceEra(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/forceEra failed.')]);
+}
+
 async function getStakingErasRewardPoints(api, eraIndex) {
     if (eraIndex) {
         return await Promise.race([
@@ -366,6 +378,18 @@ module.exports = {
                 }
             // Staking
             case 'staking/activeEra':
+                try {
+                    return {'result': await getStakingActiveEra(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+            case 'staking/eraElectionStatus':
+                try {
+                    return {'result': await getEraElectionStatus(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+            case 'staking/forceEra':
                 try {
                     return {'result': await getStakingActiveEra(api)};
                 } catch (e) {

@@ -697,6 +697,54 @@ async function startPolkadotAPI() {
         }
     });
 
+    app.get('/api/query/staking/eraElectionStatus', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "staking/eraElectionStatus");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
+    app.get('/api/query/staking/forceEra', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apis){
+                const apiResult = await substrateQuery.queryAPI(apis[websocket],
+                    "staking/forceEra");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     app.get('/api/query/staking/erasRewardPoints', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {

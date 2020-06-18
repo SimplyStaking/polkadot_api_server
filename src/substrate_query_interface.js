@@ -101,6 +101,12 @@ async function getStakingActiveEra(api) {
         Timeout.set(TIMEOUT_TIME_MS, 'API call staking/activeEra failed.')]);
 }
 
+async function getValidatorCount(api) {
+    return await Promise.race([
+        api.query.staking.validatorCount(),
+        Timeout.set(TIMEOUT_TIME_MS, 'API call staking/validatorCount failed.')]);
+}
+
 async function getEraElectionStatus(api) {
     return await Promise.race([
         api.query.staking.eraElectionStatus(),
@@ -383,6 +389,12 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+            case 'staking/validatorCount':
+                try {
+                    return {'result': await getValidatorCount(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             case 'staking/eraElectionStatus':
                 try {
                     return {'result': await getEraElectionStatus(api)};
@@ -391,7 +403,7 @@ module.exports = {
                 }
             case 'staking/forceEra':
                 try {
-                    return {'result': await getStakingActiveEra(api)};
+                    return {'result': await getForceEra(api)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

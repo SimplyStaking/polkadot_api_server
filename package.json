@@ -1,6 +1,6 @@
 {
   "name": "polkadot-api-server",
-  "version": "1.19.1",
+  "version": "1.20.1",
   "description": "API Server for Polkadot using WebSockets in JS",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
   "author": "Daniel Magro",
   "license": "Apache-2.0",
   "dependencies": {
-    "@polkadot/api": "^1.19.1",
-    "@polkadot/api-derive": "^1.19.1",
+    "@polkadot/api": "^1.20.1",
+    "@polkadot/api-derive": "^1.20.1",
     "await-timeout": "^1.1.1",
     "configparser": "^0.3.6",
     "express": "^4.17.1"

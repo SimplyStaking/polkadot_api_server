@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.23.1
+
+Released on 10th July 2020
+
+* Included the `--rpc-cors=all` flag in the `INSTALL_AND_RUN.md` guide. Note: All nodes to be added to the API server must run with this flag.
+* Updated @polkadot/api and @polkadot/api-derive packages to v1.23.1.
+* Code refactoring.
+* All endpoints now clear the timers to avoid memory leaks.
+* Every endpoint will now return a `Lost connection with node.` error message whenever the WebSocket connection is lost with the querying node.
+
 ## 1.18.1
 
 Released on 9th June 2020

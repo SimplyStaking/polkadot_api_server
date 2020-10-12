@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.24.1
+
+Released on 12th October 2020
+
+* Updated @polkadot/api and @polkadot/api-derive packages to v2.1.1.
+
 ## 1.23.1
 
 Released on 10th July 2020

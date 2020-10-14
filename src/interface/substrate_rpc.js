@@ -2,7 +2,7 @@ const timeoutUtils = require('../utils/timeout');
 
 const TIMEOUT_TIME_MS = 10000;
 
-// From: https://polkadot.js.org/api/substrate/rpc.html
+// From: https://polkadot.js.org/docs/substrate/rpc
 // Chain
 async function getChainGetBlockHash(api, blockNumber){
     // check if blockNumber has been provided or not

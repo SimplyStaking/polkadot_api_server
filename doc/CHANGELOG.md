@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.25.1
+
+Released on 15th October 2020
+
+* Updated @polkadot/api and @polkadot/api-derive packages to v2.2.1.
+* Since `provider.isConnected` is now a variable in the polkadot-js/api packages, we updated this in the server code.
+
 ## 1.24.1
 
 Released on 12th October 2020

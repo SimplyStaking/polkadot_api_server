@@ -108,7 +108,7 @@ async function startPolkadotAPI() {
                     return res.status(REQUEST_SUCCESS_STATUS).send(
                         {'result': 'pong'});
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(
                             {'error': 'API call pingNode failed.'});
                     } else {
@@ -167,7 +167,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -196,7 +196,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -227,7 +227,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -257,7 +257,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -287,7 +287,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -316,7 +316,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -345,7 +345,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -374,7 +374,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -405,7 +405,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -435,7 +435,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -464,7 +464,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -495,7 +495,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -524,7 +524,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -555,7 +555,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -585,7 +585,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -618,7 +618,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -654,7 +654,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -689,7 +689,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -719,7 +719,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -749,7 +749,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -778,7 +778,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -808,7 +808,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -841,7 +841,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -876,7 +876,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -909,7 +909,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -942,7 +942,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -974,7 +974,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1010,7 +1010,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1041,7 +1041,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected()){
+                    if (apiProviderDict[websocket].provider.isConnected){
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(

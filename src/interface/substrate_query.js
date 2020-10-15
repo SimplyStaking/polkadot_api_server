@@ -2,7 +2,7 @@ const timeoutUtils = require('../utils/timeout');
 
 const TIMEOUT_TIME_MS = 10000;
 
-// From: https://polkadot.js.org/api/substrate/storage.html
+// From: https://polkadot.js.org/docs/substrate/storage
 // Balances
 async function getBalancesTotalIssuance(api) {
     return await timeoutUtils.callFnWithTimeoutSafely(

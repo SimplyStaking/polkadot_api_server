@@ -193,6 +193,28 @@ async function getStakingErasValidatorReward(api, eraIndex) {
     }
 }
 
+async function getUnappliedSlashes(api, eraIndex) {
+    // check if eraIndex has been provided or not
+    if (eraIndex) {
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.unappliedSlashes, [eraIndex], TIMEOUT_TIME_MS,
+            'API call staking/unappliedSlashes failed.'
+        );
+    } else {
+        let activeEraIndex;
+        try {
+            activeEraIndex = await getActiveEraIndex(api);
+        } catch (e) {
+            console.log('Function call to getActiveEraIndex failed.');
+            throw 'API call staking/unappliedSlashes failed.';
+        }
+        return await timeoutUtils.callFnWithTimeoutSafely(
+            api.query.staking.unappliedSlashes, [activeEraIndex], TIMEOUT_TIME_MS,
+            'API call staking/unappliedSlashes failed.'
+        );
+    }
+}
+
 // System
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
@@ -402,6 +424,13 @@ module.exports = {
             case 'staking/erasValidatorReward':
                 try {
                     return {'result': await getStakingErasValidatorReward(api,
+                            param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+	    case 'staking/unappliedSlashes':
+                try {
+                    return {'result': await getUnappliedSlashes(api,
                             param2)};
                 } catch (e) {
                     return {'error': e.toString()};

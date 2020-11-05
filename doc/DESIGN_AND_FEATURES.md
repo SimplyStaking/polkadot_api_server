@@ -61,6 +61,7 @@ The API Server works as follows:
 | `/api/query/staking/erasTotalStake` | `websocket` | `era_index` | The total amount staked in the specified `era index`, or in the `active` one if it is not specified. Value may be in Hex |
 | `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
+| `/api/query/staking/unappliedSlashes` | `websocket` | `era_index` | List of `slashed validator`(unnaplied) in the specified era. |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Derive** | | | |

@@ -193,7 +193,7 @@ async function getStakingErasValidatorReward(api, eraIndex) {
     }
 }
 
-async function getUnappliedSlashes(api, eraIndex) {
+async function getStakingUnappliedSlashes(api, eraIndex) {
     // check if eraIndex has been provided or not
     if (eraIndex) {
         return await timeoutUtils.callFnWithTimeoutSafely(
@@ -430,7 +430,7 @@ module.exports = {
                 }
 	    case 'staking/unappliedSlashes':
                 try {
-                    return {'result': await getUnappliedSlashes(api,
+                    return {'result': await getStakingUnappliedSlashes(api,
                             param2)};
                 } catch (e) {
                     return {'error': e.toString()};

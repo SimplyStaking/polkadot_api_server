@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+* Added the `staking/unappliedSlashes`. This returns all the unapplied slashes in the specified era, or the active era if an era index is not specified.
+
 ## 1.25.1
 
 Released on 15th October 2020

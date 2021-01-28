@@ -4,6 +4,7 @@
 
 * Added the `staking/unappliedSlashes`. This returns all the unapplied slashes in the specified era, or the active era if an era index is not specified.
 * Fixed width of images in the documentation.
+* Updated @polkadot/api and @polkadot/api-derive packages to v3.6.4.
 
 ## 1.25.1
 

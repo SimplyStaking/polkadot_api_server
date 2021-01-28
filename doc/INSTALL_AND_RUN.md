@@ -140,13 +140,13 @@ git clone https://github.com/SimplyVC/polkadot_api_server
 Then run the following commands to build the image:
 ```bash
 cd polkadot_api_server
-docker build -t simplyvc/polkadot_api_server:1.25.1 .
+docker build -t simplyvc/polkadot_api_server:1.26.1 .
 ```
 
 ##### Downloading the Pre-Built Docker Image from DockerHub
 The pre-built Docker image can simply be downloaded by running the following command:
 ```bash
-docker pull simplyvc/polkadot_api_server:1.25.1
+docker pull simplyvc/polkadot_api_server:1.26.1
 ```
 
 #### Config Files Directory and Permissions

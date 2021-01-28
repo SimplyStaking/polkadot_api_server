@@ -3,6 +3,7 @@
 ## Unreleased
 
 * Added the `staking/unappliedSlashes`. This returns all the unapplied slashes in the specified era, or the active era if an era index is not specified.
+* Fixed width of images in the documentation.
 
 ## 1.25.1
 

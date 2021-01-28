@@ -15,7 +15,7 @@ The components involved in the API Server are the following:
 
 The diagram below gives an idea of the various components at play when the API Server is running, and how they interact with each other and the user/program:
 
-<img src="IMG_API_SERVER_DESIGN_5x.png" alt="design" width="648"/>
+<img src="IMG_API_SERVER_DESIGN_5x.png" alt="design"/>
 
 The API Server works as follows:
 - The API Server connects to each of these nodes one by one, as specified in the `config/user_config_nodes.ini` file.

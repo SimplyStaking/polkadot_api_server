@@ -167,7 +167,7 @@ Now that the Docker image is on your machine, and you have written configuration
 ```bash
 docker run -p 3000:3000 \
     -v <CONFIG_DIR>:/opt/polkadot_api_server/config:ro \
-    -d simplyvc/polkadot_api_server:1.25.1
+    -d simplyvc/polkadot_api_server:1.26.1
 ```
 
 Note: The port after `-p` and before the `:` can be used to route a port from the machine to the internal port of the Docker. If changing this, any program which refers to the API Docker container must refer to this port.\

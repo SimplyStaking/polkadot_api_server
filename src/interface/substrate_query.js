@@ -404,7 +404,7 @@ module.exports = {
                 }
 	    case 'staking/bonded':
                 try {
-                    return {'result': await getStakingBonded(api)};
+                    return {'result': await getStakingBonded(api,param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

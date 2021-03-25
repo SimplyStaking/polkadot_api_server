@@ -107,6 +107,13 @@ async function getStakingActiveEra(api) {
     );
 }
 
+async function getStakingBonded(api, accountId) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.staking.bonded, [accountId],
+        TIMEOUT_TIME_MS, 'API call staking/erasStakers failed.'
+    );
+}
+
 async function getStakingErasRewardPoints(api, eraIndex) {
     if (eraIndex) {
         return await timeoutUtils.callFnWithTimeoutSafely(
@@ -392,6 +399,12 @@ module.exports = {
             case 'staking/activeEra':
                 try {
                     return {'result': await getStakingActiveEra(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+	    case 'staking/bonded':
+                try {
+                    return {'result': await getStakingBonded(api)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

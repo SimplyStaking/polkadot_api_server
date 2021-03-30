@@ -1003,7 +1003,7 @@ async function startPolkadotAPI() {
             // check whether an api has been connected for that websocket
             if (websocket in apiProviderDict){
                 const apiResult = await substrateQuery.queryAPI(
-                    apiProviderDict[websocket].api, "staking/bonded",
+                    apiProviderDict[websocket].api, "staking/payee",
                     accountId
                 );
                 if ('result' in apiResult) {

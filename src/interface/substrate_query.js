@@ -200,6 +200,13 @@ async function getStakingErasValidatorReward(api, eraIndex) {
     }
 }
 
+async function getStakingPayee(api, accountId) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.staking.payee, [accountId],
+        TIMEOUT_TIME_MS, 'API call staking/payee failed.'
+    );
+}
+
 async function getStakingUnappliedSlashes(api, eraIndex) {
     // check if eraIndex has been provided or not
     if (eraIndex) {
@@ -437,6 +444,13 @@ module.exports = {
             case 'staking/erasValidatorReward':
                 try {
                     return {'result': await getStakingErasValidatorReward(api,
+                            param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+	    case 'staking/payee':
+                try {
+                    return {'result': await getStakingPayee(api,
                             param2)};
                 } catch (e) {
                     return {'error': e.toString()};

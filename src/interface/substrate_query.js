@@ -209,8 +209,8 @@ async function getStakingUnappliedSlashes(api, eraIndex) {
             throw 'API call staking/unappliedSlashes failed.';
         }
         return await timeoutUtils.callFnWithTimeoutSafely(
-            api.query.staking.unappliedSlashes, [activeEraIndex], TIMEOUT_TIME_MS,
-            'API call staking/unappliedSlashes failed.'
+            api.query.staking.unappliedSlashes, [activeEraIndex],
+            TIMEOUT_TIME_MS, 'API call staking/unappliedSlashes failed.'
         );
     }
 }

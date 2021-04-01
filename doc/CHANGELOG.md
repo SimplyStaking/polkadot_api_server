@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Updated @polkadot/api and @polkadot/api-derive packages to v4.3.1.
+
 ## 1.26.1
 
 Released on 28th January 2021

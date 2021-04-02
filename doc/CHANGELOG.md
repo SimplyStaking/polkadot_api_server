@@ -1,7 +1,7 @@
 # Change Log
 
 ## Unreleased
-
+* Added staking/bonded and staking/payee
 ## 1.26.1
 
 Released on 28th January 2021

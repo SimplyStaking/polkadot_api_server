@@ -56,7 +56,7 @@ The API Server works as follows:
 | `/api/query/session/disabledValidators` | `websocket` | None | List of `disabled validators` |
 | `/api/query/session/validators` | `websocket` | None | List of `validators` |
 | `/api/query/staking/activeEra` | `websocket` | None | `index` and `start` of the `active era` |
-| `/api/query/staking/bonded` | `websocket`, `account_id` | None | Address of controller assigned to account(stash) |
+| `/api/query/staking/bonded` | `websocket`, `account_id` | None | Map from all locked "stash" accounts to the controller account. |
 | `/api/query/staking/erasRewardPoints` | `websocket` | `era_index` | The `total` and `individual` rewards in the specified `era index`, or in the `active` one if it is not specified |
 | `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the `active` one if it is not specified |
 | `/api/query/staking/erasTotalStake` | `websocket` | `era_index` | The total amount staked in the specified `era index`, or in the `active` one if it is not specified. Value may be in Hex |

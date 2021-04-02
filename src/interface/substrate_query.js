@@ -110,7 +110,7 @@ async function getStakingActiveEra(api) {
 async function getStakingBonded(api, accountId) {
     return await timeoutUtils.callFnWithTimeoutSafely(
         api.query.staking.bonded, [accountId],
-        TIMEOUT_TIME_MS, 'API call staking/erasStakers failed.'
+        TIMEOUT_TIME_MS, 'API call staking/bonded failed.'
     );
 }
 
@@ -411,6 +411,10 @@ module.exports = {
                 }
 	    case 'staking/bonded':
                 try {
+		    if (!param2) {
+                        return {'error': 'You did not enter the stash '
+                                + 'address that needs to be queried'};
+                    }
                     return {'result': await getStakingBonded(api,param2)};
                 } catch (e) {
                     return {'error': e.toString()};
@@ -450,6 +454,10 @@ module.exports = {
                 }
 	    case 'staking/payee':
                 try {
+		    if (!param2) {
+                        return {'error': 'You did not enter the stash '
+                                + 'address that needs to be queried'};
+                    }
                     return {'result': await getStakingPayee(api,
                             param2)};
                 } catch (e) {

@@ -229,6 +229,13 @@ async function getStakingUnappliedSlashes(api, eraIndex) {
     }
 }
 
+async function getStakingValidators(api, accountId) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.staking.validators, [accountId],
+        TIMEOUT_TIME_MS, 'API call staking/validators failed.'
+    );
+}
+
 // System
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
@@ -467,6 +474,16 @@ module.exports = {
                 try {
                     return {'result': await getStakingUnappliedSlashes(api,
                             param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+	    case 'staking/validators':
+                try {
+                    if (!param2) {
+                        return {'error': 'You did not enter the stash '
+                                + 'address that needs to be queried'};
+                    }
+                    return {'result': await getStakingValidators(api,param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

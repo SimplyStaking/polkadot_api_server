@@ -63,6 +63,7 @@ The API Server works as follows:
 | `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified |
 | `/api/query/staking/payee` | `websocket`, `account_id` | None | Where the reward payment should be made. Keyed by stash. |
 | `/api/query/staking/unappliedSlashes` | `websocket` | `era_index` | List of slashed validators (unapplied) in the specified era, or the current era if an era index is not specified. |
+| `/api/query/staking/validators` | `websocket`, `account_id` | The map from (wannabe) validator stash key to the preferences of that validator. |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |

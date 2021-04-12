@@ -417,12 +417,12 @@ module.exports = {
                     return {'error': e.toString()};
                 }
 	    case 'staking/bonded':
-                try {
-		    if (!param2) {
-                        return {'error': 'You did not enter the stash '
-                                + 'address that needs to be queried'};
-                    }
-                    return {'result': await getStakingBonded(api,param2)};
+		if (!param2) {
+                    return {'error': 'You did not enter the stash '
+                            + 'address that needs to be queried'};
+                }
+		try {
+                    return {'result': await getStakingBonded(api, param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }
@@ -460,11 +460,11 @@ module.exports = {
                     return {'error': e.toString()};
                 }
 	    case 'staking/payee':
-                try {
-		    if (!param2) {
-                        return {'error': 'You did not enter the stash '
-                                + 'address that needs to be queried'};
-                    }
+		if (!param2) {
+                    return {'error': 'You did not enter the stash '
+                            + 'address that needs to be queried'};
+                }
+		try {
                     return {'result': await getStakingPayee(api,
                             param2)};
                 } catch (e) {
@@ -478,12 +478,12 @@ module.exports = {
                     return {'error': e.toString()};
                 }
 	    case 'staking/validators':
-                try {
-                    if (!param2) {
-                        return {'error': 'You did not enter the stash '
-                                + 'address that needs to be queried'};
+                if (!param2) {
+                    return {'error': 'You did not enter the stash '
+                            + 'address that needs to be queried'};
                     }
-                    return {'result': await getStakingValidators(api,param2)};
+	        try{
+                    return {'result': await getStakingValidators(api, param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

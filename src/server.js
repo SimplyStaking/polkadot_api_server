@@ -421,7 +421,6 @@ async function startPolkadotAPI() {
                 {'error': e.toString()});
         }
     });
-
     
     // Council
     app.get('/api/query/council/members', async function (req, res) {

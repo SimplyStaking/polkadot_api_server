@@ -2,9 +2,9 @@
 
 ## Unreleased
 
-* Added staking/bonded
-* Added staking/payee
-* Added staking/validators
+* Added `staking/bonded`. This returns the controller account assigned to the stash account with the specified `account_id`.
+* Added `staking/payee`. This returns the reward destination address assigned to the stash with the specified `account_id`.
+* Added `staking/validators`. This returns the preferences of the validator whose stash is the specified `account_id`.
 
 ## 1.26.1
 

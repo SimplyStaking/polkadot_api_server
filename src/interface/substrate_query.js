@@ -109,8 +109,8 @@ async function getStakingActiveEra(api) {
 
 async function getStakingBonded(api, accountId) {
     return await timeoutUtils.callFnWithTimeoutSafely(
-        api.query.staking.bonded, [accountId],
-        TIMEOUT_TIME_MS, 'API call staking/bonded failed.'
+        api.query.staking.bonded, [accountId], TIMEOUT_TIME_MS,
+        'API call staking/bonded failed.'
     );
 }
 
@@ -202,8 +202,8 @@ async function getStakingErasValidatorReward(api, eraIndex) {
 
 async function getStakingPayee(api, accountId) {
     return await timeoutUtils.callFnWithTimeoutSafely(
-        api.query.staking.payee, [accountId],
-        TIMEOUT_TIME_MS, 'API call staking/payee failed.'
+        api.query.staking.payee, [accountId], TIMEOUT_TIME_MS,
+        'API call staking/payee failed.'
     );
 }
 
@@ -231,8 +231,8 @@ async function getStakingUnappliedSlashes(api, eraIndex) {
 
 async function getStakingValidators(api, accountId) {
     return await timeoutUtils.callFnWithTimeoutSafely(
-        api.query.staking.validators, [accountId],
-        TIMEOUT_TIME_MS, 'API call staking/validators failed.'
+        api.query.staking.validators, [accountId], TIMEOUT_TIME_MS,
+        'API call staking/validators failed.'
     );
 }
 
@@ -416,12 +416,12 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-	    case 'staking/bonded':
-		if (!param2) {
-                    return {'error': 'You did not enter the stash '
-                            + 'address that needs to be queried'};
+            case 'staking/bonded':
+                if (!param2) {
+                        return {'error': 'You did not enter the stash '
+                                + 'address that needs to be queried'};
                 }
-		try {
+                try {
                     return {'result': await getStakingBonded(api, param2)};
                 } catch (e) {
                     return {'error': e.toString()};
@@ -459,30 +459,29 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-	    case 'staking/payee':
-		if (!param2) {
+            case 'staking/payee':
+                if (!param2) {
                     return {'error': 'You did not enter the stash '
                             + 'address that needs to be queried'};
                 }
-		try {
-                    return {'result': await getStakingPayee(api,
-                            param2)};
+                try {
+                    return {'result': await getStakingPayee(api, param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-	    case 'staking/unappliedSlashes':
+            case 'staking/unappliedSlashes':
                 try {
                     return {'result': await getStakingUnappliedSlashes(api,
                             param2)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }
-	    case 'staking/validators':
+            case 'staking/validators':
                 if (!param2) {
                     return {'error': 'You did not enter the stash '
                             + 'address that needs to be queried'};
-                    }
-	        try{
+                }
+                try{
                     return {'result': await getStakingValidators(api, param2)};
                 } catch (e) {
                     return {'error': e.toString()};

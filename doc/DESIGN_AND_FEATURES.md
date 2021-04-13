@@ -56,17 +56,17 @@ The API Server works as follows:
 | `/api/query/session/disabledValidators` | `websocket` | None | List of `disabled validators` |
 | `/api/query/session/validators` | `websocket` | None | List of `validators` |
 | `/api/query/staking/activeEra` | `websocket` | None | `index` and `start` of the `active era` |
-| `/api/query/staking/bonded` | `websocket`, `account_id` | None | Returns controller account assigned to stash(`account_id`) Will return `null` in case if stash doesn't have assigned controller. |
+| `/api/query/staking/bonded` | `websocket`, `account_id` | None | Controller account assigned to the stash account with the specified `account_id`. Will return `null` if the stash doesn't have a controller assigned. |
 | `/api/query/staking/erasRewardPoints` | `websocket` | `era_index` | The `total` and `individual` rewards in the specified `era index`, or in the `active` one if it is not specified |
 | `/api/query/staking/erasStakers` | `websocket`, `account_id` | `era_index` | `stakers info` -  `total balance nominated`, `balance nominated belonging to the owner`, List of `stakers` who have `nominated` and how much they have `nominated` in the specified `era index`, or in the `active` one if it is not specified |
 | `/api/query/staking/erasTotalStake` | `websocket` | `era_index` | The total amount staked in the specified `era index`, or in the `active` one if it is not specified. Value may be in Hex |
 | `/api/query/staking/erasValidatorReward` | `websocket` | `era_index` | The total validator era payout in the specified `era index`, or in the last finished era (active era - 1) if it is not specified |
-| `/api/query/staking/payee` | `websocket`, `account_id` | None | Reward destination address assigned to stash(`account_id`). Returns json with different keys depends on type of reward destination(`staked: null` - always when reward destination is a stash, `controller: addr` - always when reward destination is a controller and `result: addr` always when reward destination is an ANY address. |
+| `/api/query/staking/payee` | `websocket`, `account_id` | None | Reward destination address assigned to the stash with the specified `account_id`. Returns json with different keys depending on the type of reward destination: `staked: null` - when reward destination is a stash, `controller: addr` - when reward destination is a controller, and `result: addr` when reward destination is any other address. |
 | `/api/query/staking/unappliedSlashes` | `websocket` | `era_index` | List of slashed validators (unapplied) in the specified era, or the current era if an era index is not specified. |
-| `/api/query/staking/validators` | `websocket`, `account_id` | The map from (wannabe) validator stash key to the preferences of that validator(returns validator commission and blocked status). |
+| `/api/query/staking/validators` | `websocket`, `account_id` | Preferences of the validator whose stash is the specified `account_id` (validator commission and blocked status). |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
-| `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | the `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |
+| `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | The `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Derive** | | | |
 | `/api/derive/staking/validators` | `websocket` | None | `nextElected` - List of `validators` which will be active in the `next session` and `validators` - List of `validators` which are currently active |
 

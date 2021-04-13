@@ -100,7 +100,7 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "system/chain"
                 );
@@ -108,7 +108,7 @@ async function startPolkadotAPI() {
                     return res.status(REQUEST_SUCCESS_STATUS).send(
                         {'result': 'pong'});
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(
                             {'error': 'API call pingNode failed.'});
                     } else {
@@ -159,7 +159,7 @@ async function startPolkadotAPI() {
             // extract the blockNumber passed in the query (optional)
             const blockNumber = req.query.block_number;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "chain/getBlockHash",
                     blockNumber
@@ -167,7 +167,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -190,13 +190,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "chain/getFinalizedHead");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -221,13 +221,13 @@ async function startPolkadotAPI() {
             // extract the hash passed in the query (optional)
             const hash = req.query.hash;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "chain/getHeader", hash);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -251,13 +251,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "rpc/methods");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -281,13 +281,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "system/chain");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -310,13 +310,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "system/health");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -339,13 +339,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "system/networkState");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -368,13 +368,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateRPC.rpcAPI(
                     apiProviderDict[websocket].api, "system/properties");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -399,13 +399,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "balances/totalIssuance");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -421,7 +421,7 @@ async function startPolkadotAPI() {
                 {'error': e.toString()});
         }
     });
-    
+
     // Council
     app.get('/api/query/council/members', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -429,13 +429,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "council/members");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -458,13 +458,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "council/proposalCount");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -489,13 +489,13 @@ async function startPolkadotAPI() {
             // extract the hash passed in the query
             const hash = req.query.hash;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "council/proposalOf", hash);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -518,13 +518,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "council/proposals");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -548,14 +548,14 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "democracy/publicPropCount"
                 );
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -578,14 +578,14 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "democracy/referendumCount"
                 );
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -610,7 +610,7 @@ async function startPolkadotAPI() {
             // extract the referendumIndex passed in the query
             const referendumIndex = req.query.referendum_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api,
                     "democracy/referendumInfoOf", referendumIndex
@@ -618,7 +618,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -646,7 +646,7 @@ async function startPolkadotAPI() {
             // extract the validatorId passed in the query
             const validatorId = req.query.validator_id;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "imOnline/authoredBlocks",
                     sessionIndex, validatorId
@@ -654,7 +654,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -681,7 +681,7 @@ async function startPolkadotAPI() {
             // extract the validatorId passed in the query
             const authIndex = req.query.auth_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api,
                     "imOnline/receivedHeartbeats", sessionIndex, authIndex
@@ -689,7 +689,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -713,13 +713,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "session/currentIndex");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -742,14 +742,14 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "session/disabledValidators"
                 );
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -772,13 +772,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "session/validators");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -802,13 +802,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/activeEra");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -833,7 +833,7 @@ async function startPolkadotAPI() {
             // extract the accountId passed in the query
             const accountId = req.query.account_id;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/bonded",
                     accountId
@@ -841,7 +841,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -866,7 +866,7 @@ async function startPolkadotAPI() {
             // extract the eraIndex passed in the query (optional)
             const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/erasRewardPoints",
                     eraIndex
@@ -874,7 +874,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -901,7 +901,7 @@ async function startPolkadotAPI() {
             // extract the eraIndex passed in the query (optional)
             const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/erasStakers",
                     accountId, eraIndex
@@ -909,7 +909,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -934,7 +934,7 @@ async function startPolkadotAPI() {
             // extract the eraIndex passed in the query (optional)
             const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/erasTotalStake",
                     eraIndex
@@ -942,7 +942,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -967,7 +967,7 @@ async function startPolkadotAPI() {
             // extract the eraIndex passed in the query (optional)
             const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api,
                     "staking/erasValidatorReward", eraIndex
@@ -975,7 +975,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1000,7 +1000,7 @@ async function startPolkadotAPI() {
             // extract the accountId passed in the query
             const accountId = req.query.account_id;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/payee",
                     accountId
@@ -1008,7 +1008,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1033,7 +1033,7 @@ async function startPolkadotAPI() {
             // extract the eraIndex passed in the query (optional)
             const eraIndex = req.query.era_index;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api,
                     "staking/unappliedSlashes", eraIndex
@@ -1041,7 +1041,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1066,7 +1066,7 @@ async function startPolkadotAPI() {
             // extract the accountId passed in the query
             const accountId = req.query.account_id;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "staking/validators",
                     accountId
@@ -1074,7 +1074,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1100,13 +1100,13 @@ async function startPolkadotAPI() {
             // extract the blockHash passed in the query (optional)
             const blockHash = req.query.block_hash;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "system/events", blockHash);
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1134,7 +1134,7 @@ async function startPolkadotAPI() {
             // extract the accountAddress passed in the query
             const accountAddress = req.query.account_address;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "custom/getSlashAmount",
                     blockHash, accountAddress
@@ -1142,7 +1142,7 @@ async function startPolkadotAPI() {
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(
@@ -1167,13 +1167,13 @@ async function startPolkadotAPI() {
             // extract the web socket passed in the query
             const websocket = req.query.websocket;
             // check whether an api has been connected for that websocket
-            if (websocket in apiProviderDict){
+            if (websocket in apiProviderDict) {
                 const apiResult = await substrateDerive.deriveAPI(
                     apiProviderDict[websocket].api, "staking/validators");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
-                    if (apiProviderDict[websocket].provider.isConnected){
+                    if (apiProviderDict[websocket].provider.isConnected) {
                         return res.status(REQUEST_ERROR_STATUS).send(apiResult);
                     } else {
                         return res.status(REQUEST_ERROR_STATUS).send(

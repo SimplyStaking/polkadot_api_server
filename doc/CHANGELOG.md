@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.27.1
+
+Released on 13th April 2021
+
+* Updated @polkadot/api and @polkadot/api-derive packages to v4.3.1.
 * Added `staking/bonded`. This returns the controller account assigned to the stash account with the specified `account_id`.
 * Added `staking/payee`. This returns the reward destination address assigned to the stash with the specified `account_id`.
 * Added `staking/validators`. This returns the preferences of the validator whose stash is the specified `account_id`.

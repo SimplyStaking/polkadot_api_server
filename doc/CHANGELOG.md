@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 1.28.1
+
+Released on 7th May 2021
+
+* Updated @polkadot/api and @polkadot/api-derive packages to v4.9.2.
+
 ## 1.27.1
 
 Released on 13th April 2021

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+* Updated the version of the Docker base image from `node:12` to `node:14`
+
 ## 1.28.1
 
 Released on 7th May 2021

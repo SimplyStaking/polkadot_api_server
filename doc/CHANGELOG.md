@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.29.1
+
+Released on 23rd July 2021
+
+* Updated @polkadot/api and @polkadot/api-derive packages to v5.1.1.
+* Updated node version in dockerfile to v14.
+
 ## 1.28.1
 
 Released on 7th May 2021

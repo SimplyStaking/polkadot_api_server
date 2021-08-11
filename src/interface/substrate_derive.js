@@ -10,6 +10,14 @@ async function getStakingValidators(api) {
     );
 }
 
+// Session
+async function getSessionProgress(api) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.derive.session.progress, [], TIMEOUT_TIME_MS,
+        'API call session/progress failed.'
+    );
+}
+
 module.exports = {
     deriveAPI: async function (api, param1=null) {
         switch (param1) {
@@ -17,6 +25,13 @@ module.exports = {
             case 'staking/validators':
                 try {
                     return {'result': await getStakingValidators(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+            // Session
+            case 'session/progress':
+                try {
+                    return {'result': await getSessionProgress(api)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

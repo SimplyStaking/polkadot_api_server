@@ -1189,6 +1189,36 @@ async function startPolkadotAPI() {
                 {'error': e.toString()});
         }
     });
+
+    // Session
+    app.get('/api/derive/session/progress', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apiProviderDict) {
+                const apiResult = await substrateDerive.deriveAPI(
+                    apiProviderDict[websocket].api, "session/progress");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    if (apiProviderDict[websocket].provider.isConnected) {
+                        return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                    } else {
+                        return res.status(REQUEST_ERROR_STATUS).send(
+                            {'error': 'Lost connection with node.'});
+                    }
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
 }
 
 startPolkadotAPI();

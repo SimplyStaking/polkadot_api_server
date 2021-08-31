@@ -1092,6 +1092,39 @@ async function startPolkadotAPI() {
     });
 
     // System
+    app.get('/api/query/system/account', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // extract the accountId passed in the query
+            const accountId = req.query.account_id;
+            // check whether an api has been connected for that websocket
+            if (websocket in apiProviderDict) {
+                const apiResult = await substrateQuery.queryAPI(
+                    apiProviderDict[websocket].api, "system/account",
+                    accountId
+                );
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    if (apiProviderDict[websocket].provider.isConnected) {
+                        return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                    } else {
+                        return res.status(REQUEST_ERROR_STATUS).send(
+                            {'error': 'Lost connection with node.'});
+                    }
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     app.get('/api/query/system/events', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {

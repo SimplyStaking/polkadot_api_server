@@ -222,6 +222,12 @@ print(r.text)
 # System
 print('System:')
 
+print('/api/query/system/account')
+r = requests.get(url=API_ENDPOINT + '/api/query/system/account',
+                 params={'websocket': websocket,
+                         'account_address': 'HsGrsqL4nCBCW2ovc4kKG98c4mFp99BHRFkBSRZW1ETDe3U'})
+print(r.text)
+
 print('/api/query/system/events')
 r = requests.get(url=API_ENDPOINT + '/api/query/system/events',
                  params={'websocket': websocket})

@@ -496,8 +496,8 @@ module.exports = {
             // System
             case 'system/account':
                 if (!param2) {
-                    return {'error': 'You did not enter the stash '
-                           + 'address that needs to be queried'};
+                    return {'error': 'You did not enter the account ID '
+                           + 'that needs to be queried'};
                 }
                 try {
                     return {'result': await getSystemAccount(api, param2)};

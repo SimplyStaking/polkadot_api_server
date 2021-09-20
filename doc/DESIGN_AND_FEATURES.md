@@ -69,8 +69,8 @@ The API Server works as follows:
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | The `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Derive** | | | |
+| `/api/derive/session/progress` | `websocket` | None | Retrieves information about the current session |
 | `/api/derive/staking/validators` | `websocket` | None | `nextElected` - List of `validators` which will be active in the `next session` and `validators` - List of `validators` which are currently active |
-| `/api/derive/session/progress` | `websocket` | None | retrieves all the `session` and `era` query and calculates specific values on it as the length of the session and eras |
 
 ## Using the API
 For example, the endpoint `/api/rpc/system/health` can be called as follows: `http://localhost:3000/api/rpc/system/health?websocket=ws://1.2.3.4:9944`.

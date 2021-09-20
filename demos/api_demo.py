@@ -258,13 +258,13 @@ print()
 # Derive
 print('Derive:')
 
-print('/api/derive/staking/validators')
-r = requests.get(url=API_ENDPOINT + '/api/derive/staking/validators',
+print('/api/derive/session/progress')
+r = requests.get(url=API_ENDPOINT + '/api/derive/session/progress',
                  params={'websocket': websocket})
 print(r.text)
 
-print('/api/derive/session/progress')
-r = requests.get(url=API_ENDPOINT + '/api/derive/session/progress',
+print('/api/derive/staking/validators')
+r = requests.get(url=API_ENDPOINT + '/api/derive/staking/validators',
                  params={'websocket': websocket})
 print(r.text)
 

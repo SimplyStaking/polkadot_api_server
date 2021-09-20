@@ -1193,8 +1193,8 @@ async function startPolkadotAPI() {
     });
 
     // API Derive Endpoints
-    // Staking
-    app.get('/api/derive/staking/validators', async function (req, res) {
+    // Session
+    app.get('/api/derive/session/progress', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
@@ -1202,7 +1202,7 @@ async function startPolkadotAPI() {
             // check whether an api has been connected for that websocket
             if (websocket in apiProviderDict) {
                 const apiResult = await substrateDerive.deriveAPI(
-                    apiProviderDict[websocket].api, "staking/validators");
+                    apiProviderDict[websocket].api, "session/progress");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {
@@ -1223,8 +1223,8 @@ async function startPolkadotAPI() {
         }
     });
 
-    // Session
-    app.get('/api/derive/session/progress', async function (req, res) {
+    // Staking
+    app.get('/api/derive/staking/validators', async function (req, res) {
         console.log('Received request for %s', req.url);
         try {
             // extract the web socket passed in the query
@@ -1232,7 +1232,7 @@ async function startPolkadotAPI() {
             // check whether an api has been connected for that websocket
             if (websocket in apiProviderDict) {
                 const apiResult = await substrateDerive.deriveAPI(
-                    apiProviderDict[websocket].api, "session/progress");
+                    apiProviderDict[websocket].api, "staking/validators");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

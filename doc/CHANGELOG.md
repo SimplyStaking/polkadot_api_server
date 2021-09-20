@@ -2,6 +2,7 @@
 
 ## Unreleased
 * Added `system/account`. This returns the full information for a particular account with the specified `account_id`
+* Added `session/progress`. This returns information about the current session
 
 ## 1.29.1
 

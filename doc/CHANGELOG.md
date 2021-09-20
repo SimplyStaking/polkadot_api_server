@@ -1,6 +1,7 @@
 # Change Log
 
 ## Unreleased
+* Added `system/account`. This returns the full information for a particular account with the specified `account_id`
 
 ## 1.29.1
 

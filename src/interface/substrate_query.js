@@ -237,6 +237,13 @@ async function getStakingValidators(api, accountId) {
 }
 
 // System
+async function getSystemAccount(api, accountId) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.system.account, [accountId], TIMEOUT_TIME_MS,
+        'API call system/account failed.'
+    );
+}
+
 async function getSystemEvents(api, blockHash) {
     // check if blockHash has been provided or not
     if (blockHash) {
@@ -487,6 +494,16 @@ module.exports = {
                     return {'error': e.toString()};
                 }
             // System
+            case 'system/account':
+                if (!param2) {
+                    return {'error': 'You did not enter the account ID '
+                           + 'that needs to be queried'};
+                }
+                try {
+                    return {'result': await getSystemAccount(api, param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             case 'system/events':
                 try {
                     return {'result': await getSystemEvents(api, param2)};

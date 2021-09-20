@@ -64,7 +64,7 @@ The API Server works as follows:
 | `/api/query/staking/payee` | `websocket`, `account_id` | None | Reward destination address assigned to the stash with the specified `account_id`. Returns json with different keys depending on the type of reward destination: `staked: null` - when reward destination is a stash, `controller: addr` - when reward destination is a controller, and `result: addr` when reward destination is any other address. |
 | `/api/query/staking/unappliedSlashes` | `websocket` | `era_index` | List of slashed validators (unapplied) in the specified era, or the current era if an era index is not specified. |
 | `/api/query/staking/validators` | `websocket`, `account_id` | Preferences of the validator whose stash is the specified `account_id` (validator commission and blocked status). |
-| `/api/query/system/account` | `websocket`, `account_id` |  None | The full account information for a particular account ID |
+| `/api/query/system/account` | `websocket`, `account_id` |  None | The full account information for the specified `account_id`. |
 | `/api/query/system/events` | `websocket` | `block_hash` | `events` that happened in the specified `block hash`, or in the latest block if the block hash is not specified |
 | **Custom** | | | |
 | `/api/custom/getSlashAmount` | `websocket`, `account_address` | `block_hash` | The `balance slashed` (if any) of the specified `account address` in the specified `block hash`, or in the latest block if the block hash is not specified |

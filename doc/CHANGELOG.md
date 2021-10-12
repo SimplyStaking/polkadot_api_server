@@ -3,6 +3,7 @@
 ## Unreleased
 * Added `system/account`. This returns the full information for a particular account with the specified `account_id`
 * Added `session/progress`. This returns information about the current session
+* Updated @polkadot/api and @polkadot/api-derive packages to v6.3.1.
 
 ## 1.29.1
 

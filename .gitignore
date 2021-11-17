@@ -5,3 +5,4 @@ node_modules/
 
 config/user_config_main.ini
 config/user_config_nodes.ini
+package-lock.json

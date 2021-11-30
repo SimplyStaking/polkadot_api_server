@@ -62,6 +62,14 @@ async function getDemocracyReferendumInfoOf(api, referendumIndex) {
     );
 }
 
+//GRANDPA
+async function getGrandpaStalled(api) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.grandpa.stalled, [], TIMEOUT_TIME_MS,
+        'API call grandpa/stalled failed.'
+    );
+}
+
 // ImOnline
 async function getImOnlineAuthoredBlocks(api, sessionIndex, validatorId) {
     return await timeoutUtils.callFnWithTimeoutSafely(
@@ -73,6 +81,14 @@ async function getImOnlineAuthoredBlocks(api, sessionIndex, validatorId) {
 async function getImOnlineReceivedHeartBeats(api, sessionIndex, authIndex) {
     return await timeoutUtils.callFnWithTimeoutSafely(
         api.query.imOnline.receivedHeartbeats, [sessionIndex, authIndex],
+        TIMEOUT_TIME_MS, 'API call imOnline/receivedHeartbeats failed.'
+    );
+}
+
+//Paras
+async function getParaSessionInfoSessions(api, sessionIndex) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.paraSessionInfo.sessions, [sessionIndex],
         TIMEOUT_TIME_MS, 'API call imOnline/receivedHeartbeats failed.'
     );
 }
@@ -96,6 +112,13 @@ async function getSessionValidators(api) {
     return await timeoutUtils.callFnWithTimeoutSafely(
         api.query.session.validators, [], TIMEOUT_TIME_MS,
         'API call session/validators failed.'
+    );
+}
+
+async function getSessionQueuedKeys(api) {
+    return await timeoutUtils.callFnWithTimeoutSafely(
+        api.query.session.queuedKeys, [], TIMEOUT_TIME_MS,
+        'API call session/queuedKeys failed.'
     );
 }
 
@@ -366,6 +389,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+	    // GRANDPA
+            case 'grandpa/stalled':
+                try {
+                    return {'result': await getGrandpaStalled(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             // ImOnline
             case 'imOnline/authoredBlocks':
                 if (!param2) {
@@ -397,6 +427,13 @@ module.exports = {
                 } catch (e) {
                     return {'error': e.toString()};
                 }
+	    // Paras
+            case 'paraSessionInfo/sessions':
+                try {
+                    return {'result': await getParaSessionInfoSessions(api, param2)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
             // Session
             case 'session/currentIndex':
                 try {
@@ -413,6 +450,12 @@ module.exports = {
             case 'session/validators':
                 try {
                     return {'result': await getSessionValidators(api)};
+                } catch (e) {
+                    return {'error': e.toString()};
+                }
+	    case 'session/queuedKeys':
+                try {
+                    return {'result': await getSessionQueuedKeys(api)};
                 } catch (e) {
                     return {'error': e.toString()};
                 }

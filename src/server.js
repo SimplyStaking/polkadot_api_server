@@ -635,6 +635,36 @@ async function startPolkadotAPI() {
         }
     });
 
+    //GRANDPA
+    app.get('/api/query/grandpa/state', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apiProviderDict) {
+                const apiResult = await substrateQuery.queryAPI(
+                    apiProviderDict[websocket].api, "grandpa/state");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    if (apiProviderDict[websocket].provider.isConnected) {
+                        return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                    } else {
+                        return res.status(REQUEST_ERROR_STATUS).send(
+                            {'error': 'Lost connection with node.'});
+                    }
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
     // ImOnline
     app.get('/api/query/imOnline/authoredBlocks', async function (req, res) {
         console.log('Received request for %s', req.url);
@@ -685,6 +715,40 @@ async function startPolkadotAPI() {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api,
                     "imOnline/receivedHeartbeats", sessionIndex, authIndex
+                );
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    if (apiProviderDict[websocket].provider.isConnected) {
+                        return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                    } else {
+                        return res.status(REQUEST_ERROR_STATUS).send(
+                            {'error': 'Lost connection with node.'});
+                    }
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
+    // Paras
+    app.get('/api/query/paraSessionInfo/sessions', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // extract the sessionIndex passed in the query
+            const sessionIndex = req.query.session_index;
+            // extract the validatorId passed in the query
+            if (websocket in apiProviderDict) {
+                const apiResult = await substrateQuery.queryAPI(
+                    apiProviderDict[websocket].api,
+                    "paraSessionInfo/sessions", sessionIndex
                 );
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
@@ -775,6 +839,35 @@ async function startPolkadotAPI() {
             if (websocket in apiProviderDict) {
                 const apiResult = await substrateQuery.queryAPI(
                     apiProviderDict[websocket].api, "session/validators");
+                if ('result' in apiResult) {
+                    return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
+                } else {
+                    if (apiProviderDict[websocket].provider.isConnected) {
+                        return res.status(REQUEST_ERROR_STATUS).send(apiResult);
+                    } else {
+                        return res.status(REQUEST_ERROR_STATUS).send(
+                            {'error': 'Lost connection with node.'});
+                    }
+                }
+            } else {
+                return res.status(REQUEST_ERROR_STATUS).send(
+                    errorNeedToSetUpAPIMsg(websocket))
+            }
+        } catch (e) {
+            return res.status(REQUEST_ERROR_STATUS).send(
+                {'error': e.toString()});
+        }
+    });
+
+    app.get('/api/query/session/queuedKeys', async function (req, res) {
+        console.log('Received request for %s', req.url);
+        try {
+            // extract the web socket passed in the query
+            const websocket = req.query.websocket;
+            // check whether an api has been connected for that websocket
+            if (websocket in apiProviderDict) {
+                const apiResult = await substrateQuery.queryAPI(
+                    apiProviderDict[websocket].api, "session/queuedKeys");
                 if ('result' in apiResult) {
                     return res.status(REQUEST_SUCCESS_STATUS).send(apiResult);
                 } else {

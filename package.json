@@ -17,6 +17,6 @@
     "@polkadot/api-derive": "^5.1.1",
     "await-timeout": "^1.1.1",
     "configparser": "^0.3.6",
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
